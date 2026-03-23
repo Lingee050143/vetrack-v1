@@ -28,7 +28,7 @@ const App: React.FC = () => {
   const toggleDarkMode = () => setIsDarkMode((prev) => !prev);
 
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <div className="flex min-h-screen bg-surface-subtle selection:bg-primary-100 transition-colors duration-base">
         <Sidebar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
         <main className="flex-grow p-8 dark:bg-surface-subtle">
