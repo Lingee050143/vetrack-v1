@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MediFlow AI SaaS UI Kit Figma 제작 레퍼런스 v3.1 — Token System, Component Variant, Layout System, Dark Mode, Accessibility 포함 8페이지 통합 가이드">
+<title>MediFlow AI SaaS UI Kit · Figma 제작 레퍼런스 v3.1</title>
+<style>
+:root{
+  --c-primary:#0F766E;
+  --c-primary-hover:#134E4A;
+  --c-primary-subtle:#CCFBF1;
+  --c-bg:#F0FDFA;
+  --c-surface:#FFFFFF;
+  --c-text:#1E293B;
+  --c-text-secondary:#64748B;
+  --c-border:#E2E8F0;
+  --c-ai:#7C3AED;
+  --c-error:#DC2626;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--c-bg);color:var(--c-text);}
+.doc{max-width:1020px;margin:0 auto;padding:2rem;}
+.pg{background:#fff;border-radius:12px;padding:2.2rem 2.6rem 2rem;margin-bottom:2rem;border:.5px solid var(--c-border);box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.pm{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem;}
+.pn{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--c-text-secondary);}
+.pt{font-size:10px;font-weight:500;padding:3px 12px;border-radius:20px;background:var(--c-primary);color:#fff;}
+.pt-g{background:#059669;}.pt-r{background:#DC2626;}.pt-p{background:#7C3AED;}.pt-a{background:#D97706;}
+.sl{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--c-primary);margin:0 0 9px;}
+.sl-g{color:#065F46;}.sl-r{color:#DC2626;}.sl-a{color:#92400E;}.sl-p{color:#7C3AED;}
+.hr{border:none;border-top:.5px solid var(--c-border);margin:1.2rem 0;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:11px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:11px;}
+.pf{display:flex;align-items:center;justify-content:space-between;margin-top:1.2rem;padding-top:.9rem;border-top:.5px solid var(--c-border);}
+.ft{font-size:10px;color:var(--c-text-secondary);}
+.fd{width:6px;height:6px;border-radius:50%;background:var(--c-primary);}
+.mono{font-family:'Courier New',monospace;font-size:10px;}
+.sw{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:4px;vertical-align:middle;border:.5px solid rgba(0,0,0,.1);}
+.nb{display:inline-block;font-size:8px;font-weight:500;background:#DC2626;color:#fff;padding:1px 6px;border-radius:10px;margin-left:5px;vertical-align:middle;}
+.nb-g{background:#065F46;}.nb-p{background:#7C3AED;}
+.nbox{background:#0F172A;border-radius:8px;padding:.8rem 1rem;font-family:'Courier New',monospace;font-size:10px;line-height:1.9;color:#94A3B8;margin-bottom:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nk{color:#818CF8;}.nv{color:#34D399;}.nc{color:#94A3B8;font-size:9px;}.nh{color:#F472B6;}.nw{color:#FCD34D;}.no{color:#F87171;}.nok{color:#34D399;}.np{color:#FCD34D;}.ns{color:#67E8F9;}
+.sp{height:5px;}
+/* TABLES */
+.ptbl{width:100%;border-collapse:collapse;font-size:10.5px;margin-bottom:11px;}
+.ptbl th{font-size:9.5px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:#64748B;padding:5px 9px;text-align:left;background:#F8FAFC;border-bottom:.5px solid var(--c-border);}
+.ptbl td{padding:5px 9px;border-bottom:.5px solid var(--c-border);vertical-align:middle;line-height:1.5;}
+.ptbl tr:last-child td{border-bottom:none;}
+/* RULE BLOCKS */
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:11px;}
+.rb{border-radius:8px;border:.5px solid #E2E8F0;overflow:hidden;}
+.rh{padding:6px 10px;font-size:10px;font-weight:500;}
+.rh-b{background:#EEF2FF;color:#3730A3;}.rh-g{background:#E1F5EE;color:#085041;}
+.rh-r{background:#FEF2F2;color:#991B1B;}.rh-v{background:#F5F3FF;color:#5B21B6;}
+.rh-s{background:#F1F5F9;color:#334155;}.rh-a{background:#FFFBEB;color:#78350F;}
+.rh-p{background:#F5F3FF;color:#5B21B6;}
+.rd{padding:8px 10px;font-size:10px;line-height:1.8;background:#fff;}
+.ir{display:flex;margin-bottom:2px;}
+.ik{font-size:9px;font-weight:500;min-width:50px;flex-shrink:0;font-family:'Courier New',monospace;}
+.ki{color:#4338CA;}.kt{color:#065F46;}.kd{color:#DC2626;}
+.iv{font-family:'Courier New',monospace;font-size:9.5px;color:#1E293B;}
+.ip{color:#FCD34D;}
+/* LAYOUT LEVELS */
+.lw{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:11px;border:.5px solid #E2E8F0;border-radius:10px;overflow:hidden;}
+.lv{padding:.85rem 1rem;border-right:.5px solid #E2E8F0;}
+.lv:last-child{border-right:none;}
+.lvn{font-size:24px;font-weight:700;line-height:1;margin-bottom:3px;}
+.lvt{font-size:11px;font-weight:500;margin-bottom:5px;}
+.lvk{font-size:9.5px;font-family:'Courier New',monospace;margin-bottom:2px;}
+.lvd{font-size:9.5px;color:#64748B;margin-top:3px;}
+.l1{background:#EEF2FF;}.l1 .lvn{color:#4338CA;}
+.l2{background:#E1F5EE;}.l2 .lvn{color:#065F46;}
+.l3{background:#FFFBEB;}.l3 .lvn{color:#92400E;}
+.l4{background:#F5F3FF;}.l4 .lvn{color:#7C3AED;}
+/* TOKEN CHAIN */
+.tcc{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:7px;}
+.tcp{background:#1E293B;color:#94A3B8;border:.5px solid #334155;padding:2px 7px;border-radius:3px;font-family:'Courier New',monospace;font-size:9px;}
+.tcs{background:#1E1B4B;color:#A5B4FC;border:.5px solid #312E81;padding:2px 7px;border-radius:3px;font-family:'Courier New',monospace;font-size:9px;}
+.tco{background:#022C22;color:#6EE7B7;border:.5px solid #064E3B;padding:2px 7px;border-radius:3px;font-family:'Courier New',monospace;font-size:9px;}
+.tca{color:#94A3B8;font-size:11px;}
+/* VARIANT DECISION */
+.vd{background:#0F172A;border-radius:10px;padding:.9rem 1.1rem;margin-bottom:11px;}
+.vdt{font-size:10px;font-weight:500;color:#E2E8F0;margin-bottom:7px;text-transform:uppercase;letter-spacing:.07em;}
+.vr{display:flex;align-items:center;gap:7px;margin-bottom:5px;}
+.vr:last-child{margin-bottom:0;}
+.vc{font-family:'Courier New',monospace;font-size:9.5px;color:#FCD34D;padding:3px 8px;background:rgba(252,211,77,.1);border-radius:4px;flex:1;}
+.va{color:#94A3B8;font-size:12px;flex-shrink:0;}
+.vs{font-family:'Courier New',monospace;font-size:9.5px;color:#34D399;padding:3px 8px;background:rgba(52,211,153,.1);border-radius:4px;flex:1;}
+/* EXECUTION BLOCK */
+.eb{border-radius:10px;border:.5px solid #E2E8F0;overflow:hidden;margin-bottom:8px;}
+.eh{padding:7px 12px;display:flex;align-items:center;gap:7px;font-size:11px;font-weight:500;}
+.eh-b{background:#EEF2FF;color:#3730A3;}.eh-g{background:#E1F5EE;color:#065F46;}
+.eh-a{background:#FFFBEB;color:#78350F;}.eh-r{background:#FEF2F2;color:#991B1B;}
+.eh-t{background:#F0FDFA;color:#0F766E;}
+.ebody{display:grid;grid-template-columns:repeat(3,1fr);border-top:.5px solid var(--c-border);}
+.ec{padding:.75rem .9rem;border-right:.5px solid #E2E8F0;}
+.ec:last-child{border-right:none;}
+.ect{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:#64748B;margin-bottom:5px;}
+.badge{font-size:9px;padding:1px 7px;border-radius:10px;}
+.badge-b{background:#C7D2FE;color:#3730A3;}.badge-g{background:#9FE1CB;color:#065F46;}
+.badge-a{background:#FDE68A;color:#78350F;}.badge-r{background:#FECACA;color:#991B1B;}
+.badge-t{background:#CCFBF1;color:#0F766E;}
+/* CONTEXT BLOCK */
+.ctx{background:#1E1B4B;border-radius:10px;padding:1rem 1.2rem;margin-top:1.2rem;border:.5px solid #312E81;}
+.ctxt{font-size:9.5px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:#818CF8;margin-bottom:7px;}
+.ctxb{font-family:'Courier New',monospace;font-size:9.5px;line-height:1.85;color:#C7D2FE;}
+.cs{color:#818CF8;font-weight:500;}.cr{color:#34D399;}.cp{color:#FCD34D;}.cn{color:#94A3B8;font-size:9px;}
+/* DARK MODE */
+.dm-table{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:11px;}
+.dm-table th{font-size:9px;font-weight:500;text-transform:uppercase;color:#64748B;padding:5px 9px;text-align:left;background:#F8FAFC;border-bottom:.5px solid var(--c-border);}
+.dm-table td{padding:5px 9px;border-bottom:.5px solid var(--c-border);font-family:'Courier New',monospace;font-size:9.5px;}
+.dm-table tr:last-child td{border-bottom:none;}
+.lt{color:#1E293B;background:#fff;border-radius:3px;padding:1px 5px;border:.5px solid #E2E8F0;}
+.dk{color:#E2E8F0;background:#1E293B;border-radius:3px;padding:1px 5px;}
+/* DASHBOARD VISUAL */
+.db-wrap{background:#F1F5F9;border:.5px solid #E2E8F0;border-radius:9px;padding:1rem;margin-bottom:11px;}
+.db-label{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:#64748B;margin-bottom:7px;}
+.db-page{background:#F8FAFC;border-radius:7px;padding:.9rem;border:.5px solid #CBD5E1;}
+.db-nav{background:#1E293B;border-radius:5px;padding:.4rem .8rem;margin-bottom:.7rem;display:flex;align-items:center;justify-content:space-between;}
+.db-nav-t{font-size:9px;color:#94A3B8;font-family:'Courier New',monospace;}
+.db-section{margin-bottom:.7rem;}
+.db-sl{font-size:8.5px;font-weight:500;color:#64748B;margin-bottom:.4rem;font-family:'Courier New',monospace;}
+.db-g3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:7px;}
+.db-g2{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.db-card{border-radius:5px;padding:.5rem .65rem;border:.5px solid #E2E8F0;background:#fff;}
+.db-ct{font-size:8px;font-weight:500;color:#334155;margin-bottom:2px;}
+.db-cv{font-size:14px;font-weight:700;color:#1E293B;}
+.db-cs{font-size:7.5px;color:var(--c-text-secondary);}
+.db-table{border-radius:5px;border:.5px solid #E2E8F0;overflow:hidden;}
+.db-th{background:#F1F5F9;padding:.3rem .5rem;font-size:7.5px;font-weight:500;color:#64748B;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4px;}
+.db-tr{padding:.3rem .5rem;font-size:7.5px;color:#334155;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4px;border-top:.5px solid #F1F5F9;}
+.db-ai{border-radius:5px;padding:.55rem .7rem;background:#EFF6FF;border:.5px solid #BFDBFE;}
+.db-ait{font-size:8px;font-weight:500;color:#1E40AF;margin-bottom:3px;}
+.db-aib{font-size:7.5px;color:#3B82F6;}
+.db-badge{font-size:7px;padding:1px 5px;border-radius:8px;display:inline-block;margin-top:3px;}
+.db-bg{background:#DCFCE7;color:#15803D;}.db-by{background:#FEF9C3;color:#A16207;}.db-br{background:#FEE2E2;color:#B91C1C;}
+/* MASTER CTX */
+.mctx{background:#0F172A;border-radius:10px;padding:1.1rem 1.3rem;border:.5px solid #1E293B;}
+.mctx-title{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:#F472B6;margin-bottom:.9rem;}
+.mctx-sec{margin-bottom:.8rem;}
+.mctx-sec:last-child{margin-bottom:0;}
+.mctx-h{font-size:9px;font-weight:500;color:#818CF8;margin-bottom:4px;font-family:'Courier New',monospace;}
+.mctx-b{font-family:'Courier New',monospace;font-size:9.5px;line-height:1.85;color:#94A3B8;}
+.mctx-r{color:#34D399;}.mctx-p{color:#FCD34D;}.mctx-n{color:#475569;font-size:9px;}
+/* NOTICE */
+.notice{border-radius:7px;padding:.6rem 1rem;margin-bottom:1rem;font-size:10px;}
+.notice-p{background:#F5F3FF;border:.5px solid #DDD6FE;color:#5B21B6;}
+/* TOC */
+.toc{background:#fff;border-radius:12px;padding:1.8rem 2.2rem;margin-bottom:2rem;border:.5px solid #E2E8F0;}
+.toc-title{font-size:14px;font-weight:700;color:#1E293B;margin-bottom:1rem;}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.toc-item{padding:.6rem .9rem;border-radius:7px;border:.5px solid #E2E8F0;display:flex;align-items:center;gap:8px;text-decoration:none;color:#334155;font-size:10.5px;}
+.toc-item:hover{background:#F8FAFC;}
+.toc-num{font-family:'Courier New',monospace;font-size:10px;color:#94A3B8;min-width:20px;}
+.toc-sub{font-size:9px;color:#64748B;font-weight:400;line-height:1.5;display:block;margin-top:2px;}
+/* TOC 현재 페이지 하이라이트 */
+.toc-item.active{background:#EEF2FF;border-color:#C7D2FE;}
+.toc-item.active strong{color:var(--c-primary);}
+.toc-item.active .toc-num{color:var(--c-primary);}
+.toc-item.active .toc-sub{color:#4338CA;}
+/* 상단이동 버튼 */
+#back-to-top{position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(79,70,229,.4);opacity:0;transform:translateY(8px);transition:opacity 200ms ease-out,transform 200ms ease-out;z-index:999;}
+#back-to-top.visible{opacity:1;transform:translateY(0);}
+#back-to-top:hover{background:#4338CA;}
+/* 키보드 포커스 스타일 - WCAG 2.1 AA 2.4.7 */
+a:focus-visible,button:focus-visible{outline:2px solid var(--c-primary);outline-offset:2px;border-radius:3px;}
+.toc-item:focus-visible{outline:2px solid var(--c-primary);outline-offset:2px;}
+#back-to-top:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+.meta-row{display:flex;gap:1.5rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+.meta-tag{font-size:10px;font-weight:500;padding:2px 10px;border-radius:12px;font-family:'Courier New',monospace;}
+.meta-v{background:#EEF2FF;color:#3730A3;}
+.meta-d{background:#F1F5F9;color:#475569;}
+.meta-p{background:#E1F5EE;color:#065F46;}
+/* PRINT */
+/* 모바일 반응형 — 768px 이하 (문서 뷰어용) */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+@media (max-width: 768px){
+  .doc{padding:1rem .8rem;}
+  .pg{padding:1.4rem 1.2rem 1.2rem;border-radius:8px;}
+  /* 다단 그리드 → 1컬럼 스택 */
+  .g2,.g3,.rg{grid-template-columns:1fr;}
+  /* 3컬럼 Execution Block → 1컬럼 */
+  .ebody{grid-template-columns:1fr;}
+  .ec{border-right:none!important;border-bottom:.5px solid var(--c-border);padding:.6rem .8rem;}
+  .ec:last-child{border-bottom:none;}
+  /* 4컬럼 Layout Level → 2×2 */
+  .lw{grid-template-columns:1fr 1fr;}
+  .lv{border-right:none;border-bottom:.5px solid var(--c-border);}
+  /* 테이블 → 가로 스크롤 */
+  .ptbl,.dm-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  /* TOC 1컬럼 */
+  .toc-grid{grid-template-columns:1fr;}
+  /* 메타 태그 줄바꿈 */
+  .meta-row{flex-wrap:wrap;gap:.5rem;}
+  /* 페이지 헤더 세로 배치 */
+  .pm{flex-direction:column;align-items:flex-start;gap:.5rem;}
+  /* Variant Decision 세로 배치 */
+  .vr{flex-direction:column;gap:4px;}
+  .va{transform:rotate(90deg);align-self:center;}
+  /* 상단이동 버튼 크기 축소 */
+  #back-to-top{width:34px;height:34px;font-size:14px;bottom:1rem;right:1rem;}
+}
+@media (max-width: 480px){
+  .lw{grid-template-columns:1fr;}
+  .toc-item{font-size:10px;}
+  .nbox{font-size:9px;}
+}
+@media print{
+  body{background:#fff;}
+  .doc{padding:.5rem;}
+  .pg{box-shadow:none;border:1px solid #E2E8F0;border-radius:4px;page-break-after:always;margin-bottom:0;}
+  .toc{page-break-after:always;}
+  /* 다크 블록 → 밝은 배경으로 반전 */
+  .nbox{background:#F8FAFC!important;color:#1E293B!important;border:1px solid #E2E8F0!important;}
+  .nbox .nk{color:#4338CA!important;}.nbox .nv{color:#065F46!important;}.nbox .nc{color:#64748B!important;}
+  .nbox .nh{color:#9D174D!important;}.nbox .nw{color:#92400E!important;}.nbox .no{color:#991B1B!important;}
+  .nbox .nok{color:#065F46!important;}.nbox .np{color:#92400E!important;}.nbox .ns{color:#0E7490!important;}
+  .ctx,.mctx{background:#F1F5F9!important;border:1px solid #CBD5E1!important;}
+  .ctx .ctxt,.mctx .mctx-title{color:#3730A3!important;}
+  .ctx .ctxb,.mctx .mctx-b{color:#1E293B!important;}
+  .ctx .cs,.mctx .mctx-h{color:#3730A3!important;}
+  .ctx .cr,.mctx .mctx-r{color:#065F46!important;}
+  .ctx .cp,.mctx .mctx-p{color:#92400E!important;}
+  .ctx .cn,.mctx .mctx-n{color:#64748B!important;}
+  .vd{background:#1E293B!important;color:#F1F5F9!important;}
+  .vc{background:rgba(92,40,14,.1)!important;color:#92400E!important;}
+  .vs{background:rgba(6,95,70,.1)!important;color:#065F46!important;}
+  /* 레이아웃 레벨 색상 유지 */
+  .lv{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .rh-b,.rh-g,.rh-r,.rh-v,.rh-s,.rh-a,.rh-p{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .eh-b,.eh-g,.eh-a,.eh-r,.eh-t{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  /* 상단이동 버튼 숨김 */
+  #back-to-top{display:none!important;}
+  a{color:#334155;text-decoration:none;}
+}
+/* h1~h3 실제 태그 브라우저 기본값 초기화 */
+h1,h2,h3{all:unset;display:block;}
+h1.toc-title{font-size:14px;font-weight:700;color:#1E293B;margin-bottom:1rem;}
+h2.pt{font-size:10px;font-weight:500;padding:3px 12px;border-radius:20px;background:var(--c-primary);color:#fff;}
+h2.pt-g{background:#059669;}
+h2.pt-r{background:#DC2626;}
+h2.pt-p{background:#7C3AED;}
+h2.pt-a{background:#D97706;}
+h3.sl{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--c-primary);margin:0 0 9px;}
+h3.sl-g{color:#065F46;}
+h3.sl-r{color:#DC2626;}
+h3.sl-a{color:#92400E;}
+h3.sl-p{color:#7C3AED;}
+.tx-success{color:#059669;font-weight:500;}
+.tx-muted-sm{color:#94A3B8;font-size:9px;}
+.tx-accent-bold{color:#818CF8;font-weight:500;}
+.ec-inner{padding:5px 8px;font-size:9px;line-height:1.7;}
+</style>
+<!--
+PARAMS_META: MediFlow AI SaaS UI Kit v3.1
+자동화 파서용 파라미터 정의 블록 — [[파라미터명]] 을 아래 값으로 일괄 교체
+사용법: params 배열을 replace_order 오름차순으로 정렬 후 순차 치환
+⚠️ 치환 순서 필수: 긴 키 먼저 (Brand.Primary.600 → Brand.Primary 순)
+   잘못된 순서로 치환 시 [[Brand.Primary.600]] → "값.600" 으로 깨짐
+{
+  "version": "3.1",
+  "project": "MediFlow AI SaaS UI Kit",
+  "generated": "2026-03-18",
+  "replace_rule": "sort by replace_order ASC then find-replace [[key]]",
+  "params": [
+    {
+      "key": "Brand.Primary",
+      "replace_order": 3,
+      "default": "#0F766E",
+      "type": "color",
+      "description": "브랜드 Primary 색상",
+      "scope": "CTA · 포커스 · 링크 전체",
+      "wcag_on_white": "6.29:1 AA"
+    },
+    {
+      "key": "Brand.Primary.600",
+      "replace_order": 1,
+      "default": "#134E4A",
+      "type": "color",
+      "description": "hover 상태 색상",
+      "scope": "Button hover · Link hover",
+      "wcag_on_white": "7.90:1 AAA"
+    },
+    {
+      "key": "Brand.Primary.100",
+      "replace_order": 2,
+      "default": "#CCFBF1",
+      "type": "color",
+      "description": "선택 배경 색상",
+      "scope": "Table row selected · 강조 배경",
+      "wcag_text_on_this": "neutral/900 (#0F172A) 사용"
+    },
+    {
+      "key": "Brand.Surface.Base",
+      "replace_order": 4,
+      "default": "#FFFFFF",
+      "type": "color",
+      "description": "카드 배경색",
+      "scope": "Card · Modal · Dropdown"
+    },
+    {
+      "key": "Brand.Surface.Subtle",
+      "replace_order": 5,
+      "default": "#F0FDFA",
+      "type": "color",
+      "description": "페이지 배경색",
+      "scope": "Page 배경 전체"
+    },
+    {
+      "key": "Brand.AI.Base",
+      "replace_order": 6,
+      "default": "#7C3AED",
+      "type": "color",
+      "description": "AI 기능 전용 색상 — AI 없으면 관련 섹션 제거",
+      "scope": "AICard · AI Badge",
+      "optional": true
+    },
+    {
+      "key": "Brand.Motion.Fast",
+      "replace_order": 7,
+      "default": "100ms ease-out",
+      "type": "motion",
+      "description": "즉각 피드백 트랜지션",
+      "scope": "Button hover · Badge · Focus ring"
+    },
+    {
+      "key": "Brand.Motion.Base",
+      "replace_order": 8,
+      "default": "200ms ease-in-out",
+      "type": "motion",
+      "description": "상태 변화 트랜지션",
+      "scope": "Dropdown · Tooltip · Modal open"
+    },
+    {
+      "key": "Domain.CardType",
+      "replace_order": 9,
+      "default": "patient|appointment|diagnosis|lab|ai",
+      "type": "enum",
+      "description": "도메인 카드 타입 목록 (파이프 구분)",
+      "scope": "Card Variant Type 전체"
+    }
+  ]
+}
+END_PARAMS_META
+-->
+</head>
+<body>
+<a href="#main-content" class="skip-nav" style="position:absolute;top:-40px;left:1rem;background:var(--c-primary);color:#fff;padding:6px 14px;border-radius:0 0 6px 6px;font-size:11px;font-weight:500;text-decoration:none;transition:top 150ms ease-out;z-index:9999;" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">본문으로 건너뛰기</a>
+<main id="main-content"><div class="doc">
+
+<!-- COVER -->
+<nav aria-label="문서 목차"><div class="toc">
+  <h1 class="toc-title">MediFlow AI SaaS UI Kit · Figma 제작 레퍼런스</h1>
+  <div class="meta-row">
+    <span class="meta-tag meta-v">v3.1</span>
+    <span class="meta-tag meta-d">2026-03-18</span>
+    <span class="meta-tag meta-p">Figma 작업 참고용 + AI 코드 생성용 + 재사용 템플릿</span>
+  </div>
+  <div style="font-size:10.5px;color:#64748B;margin-bottom:1.2rem;">Token System → Component → Screen 전체 설계 기준 · 의료·병원 관리 SaaS · 8페이지 통합 레퍼런스</div>
+  <div class="toc-grid">
+    <a class="toc-item" href="#p1"><span class="toc-num">01</span><span><strong>Token System v2</strong><br><span class="toc-sub">Color · Neutral Scale · Typography · Motion Token · Variable Collection · Figma 파일 구조 · Accessibility</span></span></a>
+    <a class="toc-item" href="#p2"><span class="toc-num">02</span><span><strong>Component Variants</strong><br><span class="toc-sub">Button · Input · Badge · Avatar · Table State · Icon System · Naming Convention</span></span></a>
+    <a class="toc-item" href="#p3"><span class="toc-num">03</span><span><strong>Layer Naming + Dev Mapping</strong><br><span class="toc-sub">Figma Layer → React Props · Auto Layout → CSS Flexbox</span></span></a>
+    <a class="toc-item" href="#p4"><span class="toc-num">04</span><span><strong>Dark Mode Guide</strong><br><span class="toc-sub">Variables 5단계 · Light/Dark Token 대응표 · Elevation 처리</span></span></a>
+    <a class="toc-item" href="#p5"><span class="toc-num">05</span><span><strong>Token Usage Decision Tree</strong><br><span class="toc-sub">재사용 파라미터 · 재사용 체크리스트 · IF/THEN/DO NOT · Token 연결 체인</span></span></a>
+    <a class="toc-item" href="#p6"><span class="toc-num">06</span><span><strong>Layout System</strong><br><span class="toc-sub">4-Level Spacing · Auto Layout Preset 6종 · Responsive Breakpoint</span></span></a>
+    <a class="toc-item" href="#p7"><span class="toc-num">07</span><span><strong>Variant Architecture + Execution Blocks</strong><br><span class="toc-sub">Variant / State / Prop / Slot · Button · Card · Table · AICard · FormField · Empty/Error 패턴</span></span></a>
+    <a class="toc-item" href="#p8"><span class="toc-num">08</span><span><strong>Dashboard Blueprint</strong><br><span class="toc-sub">Composition 구조 · Layer Naming · Dark Mode Rules · Master Context Block (AI 프롬프트)</span></span></a>
+  </div>
+</div>
+</nav>
+
+<!-- PAGE 1 -->
+<div class="pg" id="p1">
+  <div class="pm">
+    <div class="pn">Page 01/08 · Token System v2 — Color / Spacing / Typography / Radius</div>
+    <h2 class="pt">Token System v2</h2>
+  </div>
+  <h3 class="sl">Color Tokens — Light / Dark 전체 정의</h3>
+  <table class="ptbl">
+  <caption class="sr-only">Color Tokens — Light / Dark 전체 정의</caption>
+    <thead><tr><th>Token Name</th><th>Light Value</th><th>Dark Value</th><th>CSS Variable</th><th>사용처</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">color/primary/500</td><td><span class="sw" aria-hidden="true" style="background:#4F46E5;"></span>#4F46E5</td><td><span class="sw" aria-hidden="true" style="background:#6366F1;"></span>#6366F1</td><td class="mono">--c-primary</td><td>CTA, 포커스, 링크</td></tr>
+      <tr><td class="mono">color/primary/600</td><td><span class="sw" aria-hidden="true" style="background:#4338CA;"></span>#4338CA</td><td><span class="sw" aria-hidden="true" style="background:#4F46E5;"></span>#4F46E5</td><td class="mono">--c-primary-h</td><td>hover 상태</td></tr>
+      <tr><td class="mono">color/success/500</td><td><span class="sw" aria-hidden="true" style="background:#22C55E;"></span>#22C55E</td><td><span class="sw" aria-hidden="true" style="background:#4ADE80;"></span>#4ADE80</td><td class="mono">--c-success</td><td>성공, 완료</td></tr>
+      <tr><td class="mono">color/warning/500</td><td><span class="sw" aria-hidden="true" style="background:#F59E0B;"></span>#F59E0B</td><td><span class="sw" aria-hidden="true" style="background:#FBBF24;"></span>#FBBF24</td><td class="mono">--c-warning</td><td>경고, 주의</td></tr>
+      <tr><td class="mono">color/error/500</td><td><span class="sw" aria-hidden="true" style="background:#EF4444;"></span>#EF4444</td><td><span class="sw" aria-hidden="true" style="background:#F87171;"></span>#F87171</td><td class="mono">--c-error</td><td>오류, 실패</td></tr>
+      <tr><td class="mono">color/surface/base</td><td><span class="sw" aria-hidden="true" style="background:#FFFFFF;border:.5px solid #CBD5E1;"></span>#FFFFFF</td><td><span class="sw" aria-hidden="true" style="background:#1E293B;"></span>#1E293B</td><td class="mono">--c-surface</td><td>Card, Modal, Dropdown</td></tr>
+      <tr><td class="mono">color/surface/subtle</td><td><span class="sw" aria-hidden="true" style="background:#F8FAFC;"></span>#F8FAFC</td><td><span class="sw" aria-hidden="true" style="background:#0F172A;"></span>#0F172A</td><td class="mono">--c-surface-subtle</td><td>Page 배경 전체</td></tr>
+      <tr><td class="mono">color/surface/elevated</td><td><span class="sw" aria-hidden="true" style="background:#FFFFFF;border:.5px solid #CBD5E1;"></span>#FFFFFF</td><td><span class="sw" aria-hidden="true" style="background:#334155;"></span>#334155</td><td class="mono">--c-surface-elevated</td><td>Tooltip, Popover</td></tr>
+      <tr><td class="mono">color/surface/overlay</td><td><span class="sw" aria-hidden="true" style="background:rgba(0,0,0,.4);"></span>rgba(0,0,0,.4)</td><td><span class="sw" aria-hidden="true" style="background:rgba(0,0,0,.6);"></span>rgba(0,0,0,.6)</td><td class="mono">--c-overlay</td><td>Modal 딤 처리</td></tr>
+      <tr><td class="mono">color/ai/base</td><td><span class="sw" aria-hidden="true" style="background:#0EA5E9;"></span>#0EA5E9</td><td><span class="sw" aria-hidden="true" style="background:#38BDF8;"></span>#38BDF8</td><td class="mono">--c-ai</td><td>AI 기능 기본</td></tr>
+      <tr><td class="mono">color/ai/state/processing</td><td><span class="sw" aria-hidden="true" style="background:#A855F7;"></span>#A855F7</td><td><span class="sw" aria-hidden="true" style="background:#C084FC;"></span>#C084FC</td><td class="mono">--c-ai-processing</td><td>AI 분석 중</td></tr>
+      <tr><td class="mono">color/ai/state/result</td><td><span class="sw" aria-hidden="true" style="background:#22C55E;"></span>#22C55E</td><td><span class="sw" aria-hidden="true" style="background:#4ADE80;"></span>#4ADE80</td><td class="mono">--c-ai-result</td><td>AI 결과 안전</td></tr>
+      <tr><td class="mono">color/ai/state/alert</td><td><span class="sw" aria-hidden="true" style="background:#F59E0B;"></span>#F59E0B</td><td><span class="sw" aria-hidden="true" style="background:#FBBF24;"></span>#FBBF24</td><td class="mono">--c-ai-alert</td><td>AI 결과 위험 감지</td></tr>
+    </tbody>
+  </table>
+  <h3 class="sl">Neutral Color Scale — 컴포넌트 전반 참조용</h3>
+  <table class="ptbl">
+  <caption class="sr-only">Neutral Color Scale — 컴포넌트 전반 참조용</caption>
+    <thead><tr><th>Token Name</th><th>Light Value</th><th>Dark Value</th><th>CSS Variable</th><th>사용처</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">color/neutral/50</td><td><span class="sw" aria-hidden="true" style="background:#F8FAFC;border:.5px solid #E2E8F0;"></span>#F8FAFC</td><td><span class="sw" aria-hidden="true" style="background:#1E293B;"></span>#1E293B</td><td class="mono">--c-neutral-50</td><td>Table header bg, Row hover</td></tr>
+      <tr><td class="mono">color/neutral/100</td><td><span class="sw" aria-hidden="true" style="background:#F1F5F9;"></span>#F1F5F9</td><td><span class="sw" aria-hidden="true" style="background:#334155;"></span>#334155</td><td class="mono">--c-neutral-100</td><td>Skeleton bg, 비활성 영역</td></tr>
+      <tr><td class="mono">color/neutral/200</td><td><span class="sw" aria-hidden="true" style="background:#E2E8F0;"></span>#E2E8F0</td><td><span class="sw" aria-hidden="true" style="background:#475569;"></span>#475569</td><td class="mono">--c-neutral-200</td><td>Card border, Divider</td></tr>
+      <tr><td class="mono">color/neutral/300</td><td><span class="sw" aria-hidden="true" style="background:#CBD5E1;"></span>#CBD5E1</td><td><span class="sw" aria-hidden="true" style="background:#64748B;"></span>#64748B</td><td class="mono">--c-neutral-300</td><td>Input border (default)</td></tr>
+      <tr><td class="mono">color/neutral/500</td><td><span class="sw" aria-hidden="true" style="background:#64748B;"></span>#64748B</td><td><span class="sw" aria-hidden="true" style="background:#94A3B8;"></span>#94A3B8</td><td class="mono">--c-neutral-500</td><td>보조 텍스트, 캡션</td></tr>
+      <tr><td class="mono">color/neutral/700</td><td><span class="sw" aria-hidden="true" style="background:#334155;"></span>#334155</td><td><span class="sw" aria-hidden="true" style="background:#CBD5E1;"></span>#CBD5E1</td><td class="mono">--c-neutral-700</td><td>본문 텍스트</td></tr>
+      <tr><td class="mono">color/neutral/900</td><td><span class="sw" aria-hidden="true" style="background:#0F172A;"></span>#0F172A</td><td><span class="sw" aria-hidden="true" style="background:#F1F5F9;"></span>#F1F5F9</td><td class="mono">--c-neutral-900</td><td>제목, 강조 텍스트</td></tr>
+      <tr><td class="mono">color/primary/100</td><td><span class="sw" aria-hidden="true" style="background:#E0E7FF;"></span>#E0E7FF</td><td><span class="sw" aria-hidden="true" style="background:#312E81;"></span>#312E81</td><td class="mono">--c-primary-100</td><td>Row selected bg, 강조 배경</td></tr>
+    </tbody>
+  </table>
+  <h3 class="sl">Spacing Scale — 8단계 (Tailwind 100% 매핑)</h3>
+  <div style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-bottom:11px;align-items:flex-end;">
+    <div style="text-align:center;"><div style="height:4px;background:#4F46E5;border-radius:2px;margin-bottom:4px;"></div><div style="font-size:9px;font-family:'Courier New',monospace;color:#64748B;">sp/1<br>4px</div></div>
+    <div style="text-align:center;"><div style="height:8px;background:#4F46E5;border-radius:2px;margin-bottom:4px;"></div><div style="font-size:9px;font-family:'Courier New',monospace;color:#64748B;">sp/2<br>8px</div></div>
+    <div style="text-align:center;"><div style="height:12px;background:#4F46E5;border-radius:2px;margin-bottom:4px;"></div><div style="font-size:9px;font-family:'Courier New',monospace;color:#64748B;">sp/3<br>12px</div></div>
+    <div style="text-align:center;"><div style="height:16px;background:#4F46E5;border-radius:2px;margin-bottom:4px;"></div><div style="font-size:9px;font-family:'Courier New',monospace;color:#64748B;">sp/4<br>16px</div></div>
+    <div style="text-align:center;"><div style="height:24px;background:#4F46E5;border-radius:2px;margin-bottom:4px;"></div><div style="font-size:9px;font-family:'Courier New',monospace;color:#64748B;">sp/5<br>24px</div></div>
+    <div style="text-align:center;"><div style="height:32px;background:#4F46E5;border-radius:2px;margin-bottom:4px;"></div><div style="font-size:9px;font-family:'Courier New',monospace;color:#64748B;">sp/6<br>32px</div></div>
+    <div style="text-align:center;"><div style="height:48px;background:#4F46E5;border-radius:2px;margin-bottom:4px;"></div><div style="font-size:9px;font-family:'Courier New',monospace;color:#64748B;">sp/7<br>48px</div></div>
+    <div style="text-align:center;"><div style="height:64px;background:#4F46E5;border-radius:2px;margin-bottom:4px;"></div><div style="font-size:9px;font-family:'Courier New',monospace;color:#64748B;">sp/8<br>64px</div></div>
+  </div>
+  <div class="g2">
+    <div>
+      <h3 class="sl">Typography Scale — Line Height / Letter Spacing 포함</h3>
+      <table class="ptbl" style="margin-bottom:0;">
+  <caption class="sr-only">Typography Scale</caption>
+        <thead><tr><th>Token</th><th>Size</th><th>Weight</th><th>Line Height</th><th>Letter Spacing</th><th>사용처</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">text/h1</td><td>30px</td><td>700</td><td>1.2 (36px)</td><td>-0.02em</td><td>페이지 제목</td></tr>
+          <tr><td class="mono">text/h2</td><td>24px</td><td>600</td><td>1.25 (30px)</td><td>-0.01em</td><td>섹션 제목</td></tr>
+          <tr><td class="mono">text/h3</td><td>20px</td><td>600</td><td>1.3 (26px)</td><td>-0.01em</td><td>카드 제목</td></tr>
+          <tr><td class="mono">text/body/lg</td><td>16px</td><td>400</td><td>1.6 (26px)</td><td>0</td><td>본문 대 — 한국어 기본</td></tr>
+          <tr><td class="mono">text/body/md</td><td>14px</td><td>400</td><td>1.6 (22px)</td><td>0</td><td>본문 기본 — 한국어 최적</td></tr>
+          <tr><td class="mono">text/body/sm</td><td>12px</td><td>400</td><td>1.5 (18px)</td><td>0.01em</td><td>보조 텍스트, Helper</td></tr>
+          <tr><td class="mono">text/caption</td><td>10px</td><td>500</td><td>1.4 (14px)</td><td>0.08em</td><td>레이블, 배지, 캡션</td></tr>
+        </tbody>
+      </table>
+      <div style="font-size:9px;color:#64748B;margin-top:5px;font-family:'Courier New',monospace;">※ 한국어 본문은 영문 대비 Line Height +0.1 권장 (가독성)</div>
+    </div>
+    <div>
+      <h3 class="sl">Border Radius</h3>
+      <table class="ptbl" style="margin-bottom:0;">
+  <caption class="sr-only">Border Radius Token</caption>
+        <thead><tr><th>Token</th><th>Value</th><th>사용처</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">radius/none</td><td>0px</td><td>Table 셀, 구분선</td></tr>
+          <tr><td class="mono">radius/sm</td><td>4px</td><td>Button, Input, Badge</td></tr>
+          <tr><td class="mono">radius/md</td><td>8px</td><td>Card, Dropdown, Modal</td></tr>
+          <tr><td class="mono">radius/lg</td><td>12px</td><td>AICard, Panel</td></tr>
+          <tr><td class="mono">radius/xl</td><td>16px</td><td>Sheet, Drawer</td></tr>
+          <tr><td class="mono">radius/full</td><td>9999px</td><td>Avatar, Chip, Toggle</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="hr"></div>
+  <h3 class="sl">Figma 파일 페이지 구조 — 작업 시작 시 이 구조로 세팅</h3>
+  <div class="g2">
+    <div>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nc">/* Figma 파일 내 Page 구조 (순서 그대로) */</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="np">00 _Cover</span> <span class="nc">← 표지, 파일 설명, 버전</span></div>
+        <div><span class="np">01 Foundation</span> <span class="nc">← Color / Typography / Spacing / Radius / Motion</span></div>
+        <div><span class="np">02 Atoms</span> <span class="nc">← Button / Badge / Avatar / Icon / Input (단독 필드)</span></div>
+        <div><span class="np">03 Molecules</span> <span class="nc">← FormField (Label+Input+Helper) / Card / List Item / Toast</span></div>
+        <div><span class="np">04 Organisms</span> <span class="nc">← Table / AICard / Nav / Modal</span></div>
+        <div><span class="np">05 Templates</span> <span class="nc">← Dashboard / Detail / Form / Empty</span></div>
+        <div><span class="np">06 Screens</span> <span class="nc">← 실제 화면 조합 (Composition Only)</span></div>
+        <div><span class="np">07 _Archive</span> <span class="nc">← deprecated 컴포넌트 (참조용 보관)</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nc">/* 페이지 규칙 */</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nok">DO</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">00, 07은 _ prefix (내부 전용)</span></div>
+        <div><span class="nok">DO</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">01 Foundation에 Variable 바인딩 확인용 Frame 배치</span></div>
+        <div><span class="nok">DO</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">02~04는 컴포넌트 정의 전용 (화면 조합 금지)</span></div>
+        <div><span class="nok">DO</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">06 Screens는 Composition Only (Page 8 규칙 준수)</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="no">DO NOT</span> <span class="nv">Screens 페이지에서 컴포넌트 내부 수정</span></div>
+        <div><span class="no">DO NOT</span> <span class="nv">Foundation에 화면 레이아웃 배치</span></div>
+        <div><span class="no">DO NOT</span> <span class="nv">Archive 삭제 (히스토리 보존)</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nc">/* 재사용 시: 01~04 유지, 05~06만 교체 */</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hr"></div>
+  <h3 class="sl">Figma Variable Collection 구조 가이드</h3>
+  <div class="g2">
+    <div>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nc">/* Figma Variables 패널 Collection 구조 */</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nh">Collection: Color System</span></div>
+        <div>&nbsp;<span class="nv">├ primitive/</span> <span class="nc">← raw values only</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nv">├ blue/50 ~ 900</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nv">├ purple/50 ~ 900</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nv">└ neutral/50 ~ 900</span></div>
+        <div>&nbsp;<span class="nv">├ semantic/</span> <span class="nc">← alias to primitive</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nv">├ primary/ (500, 600, 100)</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nv">├ surface/ (base, subtle, elevated, overlay)</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nv">├ neutral/ (50~900)</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nv">└ ai/ (base, processing, result, alert)</span></div>
+        <div>&nbsp;<span class="nv">└ component/</span> <span class="nc">← only when semantic insufficient</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nv">├ button/ (primary-bg, primary-text)</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nv">└ card/ (bg, border)</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nh">Collection: Spacing</span></div>
+        <div>&nbsp;<span class="nv">└ scale/ (1:4px ~ 8:64px)</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nh">Collection: Motion</span></div>
+        <div>&nbsp;<span class="nv">├ duration/ (fast:100ms, base:200ms, slow:300ms)</span></div>
+        <div>&nbsp;<span class="nv">└ easing/ (ease-out, ease-in-out)</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="nbox" style="margin-bottom:8px;">
+        <div><span class="nc">/* Variable Collection 설정 규칙 */</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">Mode</span>: <span class="nv">Color System에만 Light / Dark 2개 설정</span></div>
+        <div><span class="nk">Scope</span>: <span class="nv">primitive/ → "Hide from publishing" 설정</span></div>
+        <div><span class="nk">Scope</span>: <span class="nv">semantic/, component/ → publish 허용</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="no">DO NOT</span> <span class="nv">Spacing에 Mode 추가 (불필요)</span></div>
+        <div><span class="no">DO NOT</span> <span class="nv">primitive를 Component에 직접 바인딩</span></div>
+        <div><span class="no">DO NOT</span> <span class="nv">semantic 없이 component token 생성</span></div>
+      </div>
+      <div style="font-size:10px;font-weight:500;color:#1E293B;margin-bottom:6px;">Motion Token 3종</div>
+      <table class="ptbl" style="margin-bottom:0;">
+  <caption class="sr-only">Motion Token 3종</caption>
+        <thead><tr><th>Token</th><th>Duration</th><th>Easing</th><th>사용처</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">motion/fast</td><td>100ms</td><td>ease-out</td><td>hover, focus, badge</td></tr>
+          <tr><td class="mono">motion/base</td><td>200ms</td><td>ease-in-out</td><td>dropdown, tooltip open/close</td></tr>
+          <tr><td class="mono">motion/slow</td><td>300ms</td><td>ease-in-out</td><td>modal, drawer, page transition</td></tr>
+        </tbody>
+      </table>
+      <div style="font-size:9px;color:#64748B;margin-top:5px;font-family:'Courier New',monospace;">CSS: transition: color motion/fast, background-color motion/fast</div>
+    </div>
+  </div>
+  <div class="hr"></div>
+  <h3 class="sl">Accessibility Contrast Ratio 가이드 — WCAG AA/AAA 기준</h3>
+  <div style="font-size:10px;font-weight:500;color:#1E293B;margin-bottom:6px;">일반 텍스트 기준 (18px 미만 또는 14px Bold 미만) — AA: 4.5:1 이상</div>
+  <table class="ptbl" style="margin-bottom:11px;">
+  <caption class="sr-only">Accessibility Contrast Ratio — 일반 텍스트</caption>
+    <thead><tr><th>조합</th><th>실제 대비</th><th>AA (4.5:1)</th><th>사용처</th><th>판정</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">neutral/900 on surface/base</td><td>17.85:1</td><td><span role="img" aria-label="통과">✅</span></td><td>제목, 강조 텍스트</td><td class="tx-success">통과</td></tr>
+      <tr><td class="mono">neutral/700 on surface/base</td><td>10.35:1</td><td><span role="img" aria-label="통과">✅</span></td><td>본문 텍스트</td><td class="tx-success">통과</td></tr>
+      <tr><td class="mono">neutral/500 on surface/base</td><td>4.76:1</td><td><span role="img" aria-label="통과">✅</span></td><td>보조 텍스트, 캡션</td><td class="tx-success">통과 (간신히)</td></tr>
+      <tr><td class="mono">neutral/500 on surface/subtle</td><td>4.55:1</td><td><span role="img" aria-label="통과">✅</span></td><td>페이지 배경 위 보조 텍스트</td><td class="tx-success">통과 (간신히)</td></tr>
+      <tr><td class="mono">primary/500 on surface/base</td><td>6.29:1</td><td><span role="img" aria-label="통과">✅</span></td><td>링크, CTA 텍스트</td><td class="tx-success">통과</td></tr>
+      <tr><td class="mono">white on primary/500</td><td>6.29:1</td><td><span role="img" aria-label="통과">✅</span></td><td>Primary Button 텍스트</td><td class="tx-success">통과</td></tr>
+      <tr><td class="mono">white on error/500</td><td>3.76:1</td><td><span role="img" aria-label="실패">❌</span></td><td>Danger Button 흰 텍스트 ❌</td><td style="color:#DC2626;font-weight:500;">실패 — 사용 금지</td></tr>
+      <tr><td class="mono">neutral/900 on error/500</td><td>5.57:1</td><td><span role="img" aria-label="통과">✅</span></td><td>Danger 위 어두운 텍스트</td><td class="tx-success">통과 (권장)</td></tr>
+      <tr><td class="mono">ai/state/alert on surface/base</td><td>2.15:1</td><td><span role="img" aria-label="실패">❌</span></td><td>AI alert 텍스트 직접 사용 ❌</td><td style="color:#DC2626;font-weight:500;">실패 — 배경색 전용</td></tr>
+      <tr><td class="mono">neutral/900 on ai/state/alert</td><td>8.31:1</td><td><span role="img" aria-label="통과">✅</span></td><td>Alert 배경 위 텍스트</td><td class="tx-success">통과 (권장)</td></tr>
+      <tr><td class="mono">ai/state/processing on surface/base</td><td>3.96:1</td><td><span role="img" aria-label="실패">❌</span></td><td>AI 처리 중 텍스트 직접 사용 ❌</td><td style="color:#DC2626;font-weight:500;">실패 — 배경색 전용</td></tr>
+      <tr><td class="mono">ai/state/result on surface/base</td><td>2.28:1</td><td><span role="img" aria-label="실패">❌</span></td><td>AI 결과 녹색 텍스트 직접 사용 ❌</td><td style="color:#DC2626;font-weight:500;">실패 — 배경색 전용</td></tr>
+      <tr><td class="mono" style="border-top:1px solid #E2E8F0;">IF 키워드 (#4338CA) on white</td><td>7.90:1</td><td><span role="img" aria-label="통과">✅</span></td><td>Rule Block IF 키워드</td><td class="tx-success">통과 (AAA)</td></tr>
+      <tr><td class="mono">THEN 키워드 (#065F46) on white</td><td>7.68:1</td><td><span role="img" aria-label="통과">✅</span></td><td>Rule Block THEN 키워드</td><td class="tx-success">통과 (AAA)</td></tr>
+      <tr><td class="mono">DO NOT 키워드 (#DC2626) on white</td><td>4.83:1</td><td><span role="img" aria-label="통과">✅</span></td><td>Rule Block DO NOT 키워드</td><td class="tx-success">통과 (AA)</td></tr>
+      <tr><td class="mono" style="border-top:1px solid #E2E8F0;">.toc-sub 비활성 (#64748B) on white</td><td>4.76:1</td><td><span role="img" aria-label="통과">✅</span></td><td>TOC 서브키워드 비활성</td><td class="tx-success">통과 (AA)</td></tr>
+      <tr><td class="mono">.sl-a 레이블 (#92400E) on white</td><td>7.09:1</td><td><span role="img" aria-label="통과">✅</span></td><td>Page 레이블 황색 계열</td><td class="tx-success">통과 (AAA)</td></tr>
+      <tr><td class="mono">.va 화살표 (#94A3B8) on dark (#0F172A)</td><td>6.96:1</td><td><span role="img" aria-label="통과">✅</span></td><td>Variant Decision 화살표</td><td class="tx-success">통과 (AA)</td></tr>
+    </tbody>
+  </table>
+  <div style="font-size:10px;font-weight:500;color:#1E293B;margin-bottom:6px;">대형 텍스트 기준 (18px 이상 Regular, 14px Bold 이상) — AA-Large: 3:1 이상</div>
+  <table class="ptbl" style="margin-bottom:8px;">
+  <caption class="sr-only">Accessibility Contrast Ratio — 대형 텍스트</caption>
+    <thead><tr><th>조합</th><th>실제 대비</th><th>AA-Large (3:1)</th><th>사용처</th><th>판정</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">neutral/500 on surface/base</td><td>4.76:1</td><td><span role="img" aria-label="통과">✅</span></td><td>h2/h3 보조 제목 (20px+)</td><td class="tx-success">통과</td></tr>
+      <tr><td class="mono">primary/500 on surface/base</td><td>6.29:1</td><td><span role="img" aria-label="통과">✅</span></td><td>대형 링크 텍스트</td><td class="tx-success">통과</td></tr>
+      <tr><td class="mono">ai/state/result on surface/base</td><td>2.28:1</td><td><span role="img" aria-label="실패">❌</span></td><td>대형 텍스트에서도 녹색 직접 사용 불가</td><td style="color:#DC2626;font-weight:500;">실패</td></tr>
+    </tbody>
+  </table>
+  <div style="background:#FEF2F2;border:.5px solid #FECACA;border-radius:7px;padding:.65rem 1rem;margin-bottom:5px;font-size:10px;color:#991B1B;">⚠ <strong>AI State Token</strong>: alert·processing·result 모두 흰 배경 위 텍스트로 사용 시 AA 실패. <strong>배경색 전용</strong>으로만 사용, 위 텍스트는 neutral/900.</div>
+  <div style="background:#FEF2F2;border:.5px solid #FECACA;border-radius:7px;padding:.65rem 1rem;margin-bottom:0;font-size:10px;color:#991B1B;">⚠ <strong>Danger Button</strong>: white on error/500 = 3.76:1 AA 미달. neutral/900 권장 또는 18px 이상.</div>
+  <div class="ctx">
+    <div class="ctxt">Context Block</div>
+    <div class="ctxb">
+      <div><span class="cs">▸ Token Structure</span></div>
+      <div><span class="cr">Primitive → Semantic → Component (3-layer)</span></div>
+      <div><span class="cr">DO NOT use Primitive tokens directly on components</span></div>
+      <div><span class="cr">Naming: [Category]/[Role]/[Scale] e.g. color/primary/500</span></div>
+      <div><span class="cn">/* AI Token은 일반 status(success/error)와 완전 분리 */</span></div>
+      <div><span class="cs">▸ Motion Rules</span></div>
+      <div><span class="cr">IF interaction = instant feedback (hover, focus) → motion/fast (100ms, ease-out)</span></div>
+      <div><span class="cr">IF interaction = state change (open, close) → motion/base (200ms, ease-in-out)</span></div>
+      <div><span class="cr">IF interaction = large transition (page, modal) → motion/slow (300ms, ease-in-out)</span></div>
+      <div><span class="cr">DO NOT use transition duration &gt; 300ms for UI components</span></div>
+      <div><span class="cs">▸ Accessibility</span></div>
+      <div><span class="cr">DO NOT use AI State Tokens as text color — backgrounds only</span></div>
+      <div><span class="cr">DO NOT use white text on error/500 — 3.76:1 fails AA</span></div>
+      <div><span class="cr">Minimum contrast: body text 4.5:1 | large text (18px+) 3:1</span></div>
+    </div>
+  </div>
+  <div class="pf"><div class="ft">MediFlow AI SaaS UI Kit · Token System v2 · Page 01/08</div><div class="fd"></div></div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="pg" id="p2">
+  <div class="pm">
+    <div class="pn">Page 02/08 · Component Variant 전체 — Button / Input / Badge / Table / Icon System</div>
+    <h2 class="pt">Component Variants</h2>
+  </div>
+  <h3 class="sl">Button Variants</h3>
+  <div class="nbox">
+    <div><span class="nc">/* Button Variant 구조 */</span></div>
+    <div><span class="nk">_Button/Base</span> <span class="nc">(private) → </span><span class="nv">Button/Type/Size/State</span></div>
+    <div style="height:5px;"></div>
+    <div><span class="nw">Type</span>: <span class="nv">Primary | Secondary | Ghost | Danger</span></div>
+    <div><span class="nw">Size</span>: <span class="nv">SM(h:32) | MD(h:40) | LG(h:48)</span></div>
+    <div><span class="nw">State</span>: <span class="nv">Default | Hover | Active | Disabled | Loading</span></div>
+    <div><span class="nw">Icon</span>: <span class="nv">Boolean → None | Left | Right | Only</span></div>
+    <div style="height:5px;"></div>
+    <div><span class="nc">/* Token Binding */</span></div>
+    <div><span class="nk">bg (Primary/Default)</span>: <span class="np">color/primary/500</span></div>
+    <div><span class="nk">bg (Primary/Hover)</span>: <span class="np">color/primary/600</span></div>
+    <div><span class="nk">bg (Secondary/Default)</span>: <span class="nv">color/surface/base + border 1px primary/500</span></div>
+    <div><span class="nk">bg (Ghost/Default)</span>: <span class="nv">transparent</span></div>
+    <div><span class="nk">padding (MD)</span>: <span class="nv">spacing/2 spacing/4 (8px 16px)</span></div>
+    <div><span class="nk">radius</span>: <span class="nv">radius/sm (4px)</span></div>
+  </div>
+  <h3 class="sl">Input / FormField Variants</h3>
+  <div class="nbox">
+    <div><span class="nk">Input/Type/State</span></div>
+    <div><span class="nw">Type</span>: <span class="nv">Text | Password | Email | Number | Search | Select</span></div>
+    <div><span class="nw">State</span>: <span class="nv">Default | Focus | Filled | Error | Disabled</span></div>
+    <div><span class="nw">Icon</span>: <span class="nv">Boolean → Leading | Trailing</span></div>
+    <div style="height:5px;"></div>
+    <div><span class="nk">border (Default)</span>: <span class="nv">1px color/neutral/300</span></div>
+    <div><span class="nk">border (Focus)</span>: <span class="nv">2px color/primary/500</span></div>
+    <div><span class="nk">border (Error)</span>: <span class="nv">2px color/error/500</span></div>
+    <div><span class="nk">height</span>: <span class="nv">Fixed 40px</span> | <span class="nk">radius</span>: <span class="nv">radius/sm</span></div>
+  </div>
+  <div class="g2">
+    <div>
+      <h3 class="sl">Badge Variants</h3>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nw">Type</span>: <span class="nv">Status | Count | Label</span></div>
+        <div><span class="nw">Color</span>: <span class="nv">Primary | Success | Warning | Error | Neutral | AI</span></div>
+        <div><span class="nw">Size</span>: <span class="nv">SM | MD</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">padding</span>: <span class="nv">sp/1 sp/2 (2px 8px)</span></div>
+        <div><span class="nk">radius</span>: <span class="nv">radius/full</span></div>
+        <div><span class="nk">font</span>: <span class="nv">text/caption (10px, 500)</span></div>
+      </div>
+    </div>
+    <div>
+      <h3 class="sl">Avatar Variants</h3>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nw">Type</span>: <span class="nv">Image | Initial | Icon</span></div>
+        <div><span class="nw">Size</span>: <span class="nv">XS(24) | SM(32) | MD(40) | LG(48) | XL(64)</span></div>
+        <div><span class="nw">Status</span>: <span class="nv">Boolean → Online | Away | Offline</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">radius</span>: <span class="nv">radius/full</span></div>
+        <div><span class="nk">bg (Initial)</span>: <span class="np">color/primary/100</span></div>
+        <div><span class="nk">text (Initial)</span>: <span class="np">color/primary/700</span></div>
+      </div>
+    </div>
+  </div>
+  <h3 class="sl">Table State 정의</h3>
+  <table class="ptbl">
+  <caption class="sr-only">Table State 정의</caption>
+    <thead><tr><th>State</th><th>Table Level</th><th>Row Level</th><th>처리 방법</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">Default</td><td>데이터 표시</td><td>Default / Hover / Selected / Disabled</td><td>정상 렌더</td></tr>
+      <tr><td class="mono">Loading</td><td>Skeleton 표시</td><td>Row/State=Loading</td><td>동일 높이 Skeleton pulse</td></tr>
+      <tr><td class="mono">Empty</td><td>Empty State</td><td>—</td><td>빈 상태 + CTA 버튼</td></tr>
+      <tr><td class="mono">Error</td><td>Error State</td><td>—</td><td>오류 메시지 + Retry 버튼</td></tr>
+    </tbody>
+  </table>
+  <div class="hr"></div>
+  <h3 class="sl">Icon System 가이드 — 사이즈 / 네이밍 / 라이브러리</h3>
+  <div class="g2">
+    <div>
+      <table class="ptbl" style="margin-bottom:8px;">
+  <caption class="sr-only">Icon System 사이즈 기준</caption>
+        <thead><tr><th>사이즈</th><th>사용처</th><th>Figma 설정</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">16×16px</td><td>Badge 내부, 텍스트 인라인, Caption</td><td>Fixed 16×16, Stroke 1.5px</td></tr>
+          <tr><td class="mono">20×20px</td><td>Button 아이콘, Input 아이콘, List Item</td><td>Fixed 20×20, Stroke 1.5px</td></tr>
+          <tr><td class="mono">24×24px</td><td>Nav 아이콘, Card 헤더, 독립 사용</td><td>Fixed 24×24, Stroke 2px</td></tr>
+          <tr><td class="mono">32×32px</td><td>Empty State, 대형 액션 버튼</td><td>Fixed 32×32, Stroke 2px</td></tr>
+        </tbody>
+      </table>
+      <div style="font-size:10px;font-weight:500;color:#1E293B;margin-bottom:5px;">추천 라이브러리</div>
+      <div class="nbox" style="margin-bottom:0;padding:6px 10px;font-size:9.5px;line-height:1.9;">
+        <div><span class="np">Lucide Icons</span> <span class="nc">← 추천 1순위 (MIT, Figma 플러그인 있음)</span></div>
+        <div><span class="np">Heroicons</span> <span class="nc">← 추천 2순위 (MIT, Tailwind 팀 제작)</span></div>
+        <div><span class="nc">/* 두 라이브러리 혼용 금지 — 스트로크 스타일 충돌 */</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nc">/* Icon Naming Convention */</span></div>
+        <div><span class="nk">패턴</span>: <span class="nv">icon/[category]/[name]</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nv">icon/arrow/right</span></div>
+        <div><span class="nv">icon/arrow/chevron-down</span></div>
+        <div><span class="nv">icon/action/edit</span></div>
+        <div><span class="nv">icon/action/delete</span></div>
+        <div><span class="nv">icon/status/check-circle</span></div>
+        <div><span class="nv">icon/status/alert-triangle</span></div>
+        <div><span class="nv">icon/ai/scan</span></div>
+        <div><span class="nv">icon/ai/sparkle</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nc">/* Figma 컴포넌트화 규칙 */</span></div>
+        <div><span class="nok">DO</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">각 아이콘을 Component로 등록</span></div>
+        <div><span class="nok">DO</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">Color → currentColor로 설정</span></div>
+        <div><span class="no">DO NOT</span> <span class="nv">아이콘 직접 Detach 후 수정</span></div>
+        <div><span class="no">DO NOT</span> <span class="nv">Stroke → Fill 변환 (확대 시 깨짐)</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ctx">
+    <div class="ctxt">Context Block — AI 코드 생성 프롬프트 앞에 붙여넣기</div>
+    <div class="ctxb">
+      <div><span class="cs">▸ Variant Naming Rules</span></div>
+      <div><span class="cr">Button: variant=primary|secondary|ghost|danger, size=sm|md|lg, state=default|hover|active|disabled|loading</span></div>
+      <div><span class="cr">Input: type=text|password|email|number|search|select, state=default|focus|filled|error|disabled</span></div>
+      <div><span class="cr">Badge: color=primary|success|warning|error|neutral|ai, size=sm|md</span></div>
+      <div><span class="cr">Avatar: type=image|initial|icon, size=xs|sm|md|lg|xl</span></div>
+      <div><span class="cr">Table State: default|loading|empty|error — DO NOT skip empty/error states</span></div>
+      <div><span class="cr">Row State: default|hover|selected|disabled|loading(skeleton)</span></div>
+      <div><span class="cn">/* Skeleton: 동일 높이 유지, color/neutral/100 pulse */</span></div>
+    </div>
+  </div>
+  <div class="pf"><div class="ft">MediFlow AI SaaS UI Kit · Component Variants · Page 02/08</div><div class="fd"></div></div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="pg" id="p3">
+  <div class="pm">
+    <div class="pn">Page 03/08 · Layer Naming Convention + Dev Mapping</div>
+    <h2 class="pt">Layer Naming</h2>
+  </div>
+  <h3 class="sl">Figma Layer Naming → React Props 매핑</h3>
+  <table class="ptbl">
+  <caption class="sr-only">Figma Layer Naming → React Props 매핑</caption>
+    <thead><tr><th>Figma Layer 명</th><th>React Component</th><th>Props 매핑</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">Button/Primary/MD/Default</td><td class="mono">&lt;Button&gt;</td><td class="mono">variant="primary" size="md"</td><td>State=Default 생략 가능</td></tr>
+      <tr><td class="mono">Button/Ghost/SM/Disabled</td><td class="mono">&lt;Button&gt;</td><td class="mono">variant="ghost" size="sm" disabled</td><td></td></tr>
+      <tr><td class="mono">Card/Patient/Default/MD</td><td class="mono">&lt;Card&gt;</td><td class="mono">type="pet" state="default" size="md"</td><td></td></tr>
+      <tr><td class="mono">Card/AI/Loading/MD</td><td class="mono">&lt;Card&gt;</td><td class="mono">type="ai" state="loading"</td><td></td></tr>
+      <tr><td class="mono">Table/State=Default</td><td class="mono">&lt;Table&gt;</td><td class="mono">state="default"</td><td></td></tr>
+      <tr><td class="mono">Row/State=Selected</td><td class="mono">&lt;TableRow&gt;</td><td class="mono">selected={true}</td><td></td></tr>
+      <tr><td class="mono">Badge/Success/MD</td><td class="mono">&lt;Badge&gt;</td><td class="mono">color="success" size="md"</td><td></td></tr>
+      <tr><td class="mono">Input/Text/Focus</td><td class="mono">&lt;Input&gt;</td><td class="mono">type="text" state="focus"</td><td></td></tr>
+      <tr><td class="mono">AICard/State=Processing</td><td class="mono">&lt;AICard&gt;</td><td class="mono">state="processing"</td><td>riskLevel은 별도 prop</td></tr>
+      <tr><td class="mono">AICard/State=Result</td><td class="mono">&lt;AICard&gt;</td><td class="mono">state="result" riskLevel="critical"</td><td></td></tr>
+      <tr><td class="mono">FormField/Text/Default</td><td class="mono">&lt;FormField&gt;</td><td class="mono">type="text" state="default"</td><td>Label+Helper=Slot</td></tr>
+      <tr><td class="mono">FormField/Email/Error</td><td class="mono">&lt;FormField&gt;</td><td class="mono">type="email" state="error"</td><td>HelperText에 에러 메시지</td></tr>
+    </tbody>
+  </table>
+  <h3 class="sl">Auto Layout → CSS Flexbox 대응표</h3>
+  <table class="ptbl">
+  <caption class="sr-only">Auto Layout → CSS Flexbox 대응표</caption>
+    <thead><tr><th>Figma Auto Layout</th><th>CSS</th><th>예시</th></tr></thead>
+    <tbody>
+      <tr><td>Direction: Horizontal</td><td class="mono">display:flex; flex-direction:row;</td><td>Button, List Item</td></tr>
+      <tr><td>Direction: Vertical</td><td class="mono">display:flex; flex-direction:column;</td><td>Card, FormField</td></tr>
+      <tr><td>Align: Center</td><td class="mono">align-items:center; justify-content:center;</td><td>Button 내부</td></tr>
+      <tr><td>Align: Space Between</td><td class="mono">justify-content:space-between;</td><td>Card Header</td></tr>
+      <tr><td>Fill Container</td><td class="mono">width:100%;</td><td>Card, Input</td></tr>
+      <tr><td>Hug Contents</td><td class="mono">width:fit-content;</td><td>Button, Badge</td></tr>
+      <tr><td>Fixed Size</td><td class="mono">width:Xpx; height:Xpx;</td><td>Avatar, Icon</td></tr>
+    </tbody>
+  </table>
+  <div class="ctx">
+    <div class="ctxt">Context Block — AI 코드 생성 프롬프트 앞에 붙여넣기</div>
+    <div class="ctxb">
+      <div><span class="cs">▸ Layer Naming Rules</span></div>
+      <div><span class="cr">Naming pattern: ComponentName/Variant/Size/State</span></div>
+      <div><span class="cr">Screen level: Frame/ScreenName → Section/SectionName → Component/Name</span></div>
+      <div><span class="cr">Private base: prefix with underscore e.g. _Button/Base</span></div>
+      <div><span class="cs">▸ Figma → React mapping</span></div>
+      <div><span class="cr">Button/Primary/MD/Default → &lt;Button variant="primary" size="md" /&gt;</span></div>
+      <div><span class="cr">Card/Patient/Default/MD → &lt;Card type="pet" state="default" size="md" /&gt;</span></div>
+      <div><span class="cr">FormField/Text/Error → &lt;FormField type="text" state="error" /&gt;</span></div>
+      <div><span class="cr">AICard/State=Result → &lt;AICard state="result" riskLevel="critical" /&gt;</span></div>
+      <div><span class="cs">▸ Auto Layout → CSS</span></div>
+      <div><span class="cr">direction=horizontal → flex-direction:row | vertical → flex-direction:column</span></div>
+      <div><span class="cr">Fill container → width:100% | Hug contents → width:fit-content</span></div>
+    </div>
+  </div>
+  <div class="pf"><div class="ft">MediFlow AI SaaS UI Kit · Layer Naming + Dev Mapping · Page 03/08</div><div class="fd"></div></div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="pg" id="p4">
+  <div class="pm">
+    <div class="pn">Page 04/08 · Dark Mode — Variables 5단계 + 실전 작업 순서</div>
+    <h2 class="pt">Dark Mode Guide</h2>
+  </div>
+  <h3 class="sl">Figma Variables Dark Mode 적용 5단계</h3>
+  <div class="nbox">
+    <div><span class="nk">Step 1</span> <span class="nv">Variable Collection 생성 → "Color System" 이름으로</span></div>
+    <div><span class="nk">Step 2</span> <span class="nv">Mode 2개 추가 → "Light" / "Dark"</span></div>
+    <div><span class="nk">Step 3</span> <span class="nv">Semantic Token 각 Mode에 값 입력</span></div>
+    <div><span class="nc">         surface/base: Light=#FFFFFF / Dark=#1E293B</span></div>
+    <div><span class="nc">         surface/subtle: Light=#F8FAFC / Dark=#0F172A</span></div>
+    <div><span class="nk">Step 4</span> <span class="nv">Component에 Semantic Token 바인딩 (Primitive 직접 ❌)</span></div>
+    <div><span class="nk">Step 5</span> <span class="nv">Frame 선택 → Variables 패널 → Mode 전환으로 확인</span></div>
+  </div>
+  <h3 class="sl">Dark Mode Color 전체 대응표</h3>
+  <table class="dm-table">
+  <caption class="sr-only">Dark Mode Color 전체 대응표</caption>
+    <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td>color/surface/base</td><td><span class="lt">#FFFFFF</span></td><td><span class="dk">#1E293B</span></td><td>카드, 모달</td></tr>
+      <tr><td>color/surface/subtle</td><td><span class="lt">#F8FAFC</span></td><td><span class="dk">#0F172A</span></td><td>페이지 배경</td></tr>
+      <tr><td>color/surface/elevated</td><td><span class="lt">#FFFFFF</span></td><td><span class="dk">#334155</span></td><td>Tooltip, 팝오버</td></tr>
+      <tr><td>color/neutral/900</td><td><span class="lt">#0F172A</span></td><td><span class="dk">#F1F5F9</span></td><td>기본 텍스트</td></tr>
+      <tr><td>color/neutral/700</td><td><span class="lt">#334155</span></td><td><span class="dk">#CBD5E1</span></td><td>본문 텍스트</td></tr>
+      <tr><td>color/neutral/500</td><td><span class="lt">#64748B</span></td><td><span class="dk">#94A3B8</span></td><td>보조 텍스트</td></tr>
+      <tr><td>color/neutral/200</td><td><span class="lt">#E2E8F0</span></td><td><span class="dk">#334155</span></td><td>Border</td></tr>
+      <tr><td>color/ai/state/processing</td><td><span class="lt">#A855F7</span></td><td><span class="dk">#C084FC</span></td><td>AI 처리 중</td></tr>
+    </tbody>
+  </table>
+  <h3 class="sl">Dark Mode Elevation — Shadow 대신 Border 조합</h3>
+  <div class="nbox">
+    <div><span class="nc">/* Figma Variables는 Shadow Token 미지원 */</span></div>
+    <div><span class="nc">/* Dark Mode에서 Elevation 표현 방법 */</span></div>
+    <div style="height:5px;"></div>
+    <div><span class="nk">L0 (flat)</span>: <span class="nv">bg = surface/subtle / border = none</span></div>
+    <div><span class="nk">L1 (card)</span>: <span class="nv">bg = surface/base / border = 1px neutral/200</span></div>
+    <div><span class="nk">L2 (floating)</span>: <span class="nv">bg = surface/elevated / border = 1px neutral/300</span></div>
+    <div><span class="nk">L3 (modal)</span>: <span class="nv">bg = surface/base / overlay + border = 1px neutral/200</span></div>
+    <div style="height:5px;"></div>
+    <div><span class="no">DO NOT</span> <span class="nv">box-shadow Token으로 Elevation 관리 시도</span></div>
+  </div>
+  <div class="ctx">
+    <div class="ctxt">Context Block — AI 코드 생성 프롬프트 앞에 붙여넣기</div>
+    <div class="ctxb">
+      <div><span class="cs">▸ Dark Mode Rules</span></div>
+      <div><span class="cr">IF theme change → Figma Variables Mode (not Variant, not separate component)</span></div>
+      <div><span class="cr">IF component interaction state → State Variant axis (not Mode)</span></div>
+      <div><span class="cr">IF Dark Mode elevation → border + surface/elevated combo (Shadow Token not supported)</span></div>
+      <div><span class="cs">▸ Key Token Pairs</span></div>
+      <div><span class="cr">surface/base: Light=#FFFFFF / Dark=#1E293B</span></div>
+      <div><span class="cr">surface/subtle: Light=#F8FAFC / Dark=#0F172A</span></div>
+      <div><span class="cr">neutral/900: Light=#0F172A / Dark=#F1F5F9</span></div>
+      <div><span class="cr">DO NOT use Shadow Token for elevation — use border + surface/elevated instead</span></div>
+      <div><span class="cn">/* Step: Variables Collection → Mode 2개(Light/Dark) → Semantic Token 바인딩 */</span></div>
+    </div>
+  </div>
+  <div class="pf"><div class="ft">MediFlow AI SaaS UI Kit · Dark Mode Guide · Page 04/08</div><div class="fd"></div></div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="pg" id="p5">
+  <div class="pm">
+    <div class="pn">Page 05/08 · Token Usage Decision Tree + Component Token Connection</div>
+    <h2 class="pt">Token Usage</h2>
+  </div>
+  <h3 class="sl">재사용 파라미터 — 다른 프로젝트 적용 시 이 값만 교체 <span class="nb" style="background:#059669;">재사용 가이드</span></h3>
+  <table class="ptbl">
+  <caption class="sr-only">재사용 파라미터 목록</caption>
+    <thead><tr><th>파라미터</th><th>현재 값 (MediFlow AI)</th><th>교체 방법</th><th>영향 범위</th></tr></thead>
+    <tbody>
+      <tr><td><span class="mono" style="color:#FCD34D;">{{Brand.Primary}}</span></td><td><span class="sw" aria-hidden="true" style="background:#0F766E;"></span><span class="mono">#0F766E</span></td><td>브랜드 Primary 색상으로 교체</td><td>CTA · 포커스 · 링크 전체</td></tr>
+      <tr><td><span class="mono" style="color:#FCD34D;">{{Brand.Primary.600}}</span></td><td><span class="sw" aria-hidden="true" style="background:#134E4A;"></span><span class="mono">#4338CA</span></td><td>hover 색상으로 교체</td><td>Button hover · Link hover</td></tr>
+      <tr><td><span class="mono" style="color:#FCD34D;">{{Brand.Primary.100}}</span></td><td><span class="sw" aria-hidden="true" style="background:#CCFBF1;border:.5px solid #C7D2FE;"></span><span class="mono">#E0E7FF</span></td><td>선택 배경 색상으로 교체</td><td>Table row selected · 강조 배경</td></tr>
+      <tr><td><span class="mono" style="color:#FCD34D;">{{Brand.Surface.Base}}</span></td><td><span class="sw" aria-hidden="true" style="background:#fff;border:.5px solid #cbd5e1;"></span><span class="mono">#FFFFFF</span></td><td>카드 배경색으로 교체</td><td>Card · Modal · Dropdown</td></tr>
+      <tr><td><span class="mono" style="color:#FCD34D;">{{Brand.Surface.Subtle}}</span></td><td><span class="sw" aria-hidden="true" style="background:#F8FAFC;"></span><span class="mono">#F8FAFC</span></td><td>페이지 배경색으로 교체</td><td>Page 배경 전체</td></tr>
+      <tr><td><span class="mono" style="color:#FCD34D;">{{Brand.AI.Base}}</span></td><td><span class="sw" aria-hidden="true" style="background:#7C3AED;"></span><span class="mono">#0EA5E9</span></td><td>AI 기능 색상 교체 (없으면 제거)</td><td>AICard · AI Badge</td></tr>
+      <tr><td><span class="mono" style="color:#FCD34D;">{{Domain.CardType}}</span></td><td><span class="mono">patient|appointment|diagnosis|lab|ai</span></td><td>도메인 맞게 교체</td><td>Card Variant Type 전체</td></tr>
+      <tr><td><span class="mono" style="color:#FCD34D;">{{Brand.Motion.Fast}}</span></td><td><span class="mono">100ms ease-out</span></td><td>hover/focus transition 교체</td><td>Button hover · Badge · Focus ring</td></tr>
+      <tr><td><span class="mono" style="color:#FCD34D;">{{Brand.Motion.Base}}</span></td><td><span class="mono">200ms ease-in-out</span></td><td>open/close transition 교체</td><td>Dropdown · Tooltip · Modal open</td></tr>
+    </tbody>
+  </table>
+  <div class="hr"></div>
+  <h3 class="sl">재사용 체크리스트 — 다른 프로젝트에 적용하는 7단계</h3>
+  <div class="g2" style="margin-bottom:9px;">
+    <div>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nc">/* Step 1~4: Token 교체 */</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">Step 1</span> <span class="nv">{{Brand.Primary}} → 새 브랜드 색상으로 교체</span></div>
+        <div><span class="nc">         {{Brand.Primary.600}} → hover 색상 교체</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">Step 2</span> <span class="nv">Surface Token 교체</span></div>
+        <div><span class="nc">         {{Brand.Surface.Base}} → 카드 배경</span></div>
+        <div><span class="nc">         {{Brand.Surface.Subtle}} → 페이지 배경</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">Step 3</span> <span class="nv">AI Token 처리</span></div>
+        <div><span class="nc">         AI 기능 있음 → {{Brand.AI.Base}} 교체</span></div>
+        <div><span class="nc">         AI 기능 없음 → AI 관련 섹션 전체 제거</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">Step 4</span> <span class="nv">{{Domain.CardType}} → 새 도메인 카드 타입으로 교체</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nc">/* Step 5~7: 구조 교체 */</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">Step 5</span> <span class="nv">Page 1 Figma 파일 구조 가이드 확인</span></div>
+        <div><span class="nc">         00 Cover 페이지 업데이트</span></div>
+        <div><span class="nc">         05 Templates 새 도메인으로 교체</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">Step 6</span> <span class="nv">Page 8 Dashboard Blueprint 업데이트</span></div>
+        <div><span class="nc">         Section 이름을 새 도메인으로 교체</span></div>
+        <div><span class="nc">         Component 참조는 Page 7 그대로 유지</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">Step 7</span> <span class="nv">Master Context Block 파라미터 업데이트</span></div>
+        <div><span class="nc">         {{Brand.*}} / {{Domain.*}} 새 값으로 교체</span></div>
+        <div><span class="nc">         AI 없으면 AI Token 규칙 제거</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nok">완료</span> <span class="nv">→ 이 문서 그대로 새 프로젝트에 활용 가능</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hr"></div>
+  <h3 class="sl">Token Usage — IF / THEN / DO NOT</h3>
+  <div class="rg">
+    <div class="rb"><div class="rh rh-b">배경색 (Background)</div><div class="rd">
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">container = page</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv"><span class="ip">{{Brand.Surface.Subtle}}</span> 사용</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">container = card | modal | dropdown</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv"><span class="ip">{{Brand.Surface.Base}}</span> 사용</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">container = modal + overlay</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv"><span class="ip">{{Brand.Surface.Base}}</span> + color/surface/overlay</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">page 배경에 surface/base 사용</span></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">HEX 직접 입력</span></div>
+    </div></div>
+    <div class="rb"><div class="rh rh-s">텍스트 (Text)</div><div class="rd">
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">importance = high (제목)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">color/neutral/900</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">importance = normal (본문)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">color/neutral/700</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">importance = low (캡션)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">color/neutral/500</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">text = interactive (링크·CTA)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv"><span class="ip">{{Brand.Primary}}</span></span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">동일 배경에 900+900 조합</span></div>
+    </div></div>
+    <div class="rb"><div class="rh rh-r">AI 컴포넌트</div><div class="rd">
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">ai_state = idle</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv"><span class="ip">{{Brand.AI.Base}}</span></span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">ai_state = processing</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">color/ai/state/processing</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">ai_state = result (normal)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">color/ai/state/result</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">ai_state = result (위험)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">color/ai/state/alert</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">AI 결과에 color/success 혼용</span></div>
+    </div></div>
+    <div class="rb"><div class="rh rh-v">인터랙션 (State)</div><div class="rd">
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">state = default</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv"><span class="ip">{{Brand.Primary}}</span>/500</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">state = hover</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv"><span class="ip">{{Brand.Primary.600}}</span></span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">state = disabled</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">opacity 0.4, no pointer-events</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">state = focus</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv"><span class="ip">{{Brand.Primary}}</span> 2px outline</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">disabled 전용 Token 별도 생성</span></div>
+    </div></div>
+  </div>
+  <div class="hr"></div>
+  <h3 class="sl sl-g">Token → Component 연결 (Primitive → Semantic → Component)</h3>
+  <div class="g2">
+    <div>
+      <div style="font-size:10px;font-weight:500;margin-bottom:5px;">Button.Primary.bg</div>
+      <div class="tcc"><span class="tcp">color/blue/500</span><span class="tca">→alias→</span><span class="tcs">color/primary/500</span><span class="tca">→bind→</span><span class="tco">Button.Primary.bg</span></div>
+      <div style="font-size:10px;font-weight:500;margin-bottom:5px;">Card.bg</div>
+      <div class="tcc"><span class="tcp">color/white</span><span class="tca">→alias→</span><span class="tcs">color/surface/base</span><span class="tca">→bind→</span><span class="tco">Card.bg</span></div>
+      <div style="font-size:10px;font-weight:500;margin-bottom:5px;">AICard.Processing.bg</div>
+      <div class="tcc"><span class="tcp">color/purple/500</span><span class="tca">→alias→</span><span class="tcs">color/ai/state/processing</span><span class="tca">→bind→</span><span class="tco">AICard.Processing.bg</span></div>
+    </div>
+    <div>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nc">/* 연결 규칙 */</span></div>
+        <div><span class="no">DO NOT</span> <span class="nv">Primitive → Component 직접 바인딩</span></div>
+        <div><span class="nc">/* ❌ Button.bg = color/blue/500 */</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nok">DO</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">Semantic 거쳐서 Component 연결</span></div>
+        <div><span class="nc">/* ✅ Button.bg = color/primary/500 */</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nc">/* Naming: [Category].[Component].[Role].[State] */</span></div>
+        <div><span class="nk">color.button.primary.default</span></div>
+        <div><span class="nk">color.button.primary.hover</span></div>
+        <div><span class="nc">/* 재사용 시 Primitive 값만 교체 */</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ctx">
+    <div class="ctxt">Context Block</div>
+    <div class="ctxb">
+      <div><span class="cs">▸ Token Rules</span></div>
+      <div><span class="cr">IF container=page → bg=<span class="cp">{{Brand.Surface.Subtle}}</span></span></div>
+      <div><span class="cr">IF container=card|modal → bg=<span class="cp">{{Brand.Surface.Base}}</span></span></div>
+      <div><span class="cr">IF ai_state=processing → color=color/ai/state/processing</span></div>
+      <div><span class="cr">IF ai_state=result(normal) → color=color/ai/state/result</span></div>
+      <div><span class="cr">IF ai_state=alert → color=color/ai/state/alert</span></div>
+      <div><span class="cr">DO NOT bind Primitive tokens directly to components</span></div>
+      <div><span class="cn">/* {{Brand.*}} 값은 프로젝트별 교체 */</span></div>
+    </div>
+  </div>
+  <div class="pf"><div class="ft">MediFlow AI SaaS UI Kit · Token Usage Decision Tree · Page 05/08</div><div class="fd"></div></div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="pg" id="p6">
+  <div class="pm">
+    <div class="pn">Page 06/08 · Layout System 4단계 + Auto Layout Preset</div>
+    <h2 class="pt pt-g">Layout System v1</h2>
+  </div>
+  <h3 class="sl">4-Level Layout System</h3>
+  <div class="lw">
+    <div class="lv l1"><div class="lvn">L1</div><div class="lvt">Page Level</div><div class="lvk">spacing/7 = 48px</div><div class="lvk">spacing/8 = 64px</div><div class="lvd">페이지 외곽 마진, 전체 콘텐츠 padding</div></div>
+    <div class="lv l2"><div class="lvn">L2</div><div class="lvt">Section Level</div><div class="lvk">spacing/5 = 24px</div><div class="lvk">spacing/6 = 32px</div><div class="lvd">섹션 간격, Dashboard 위젯 그룹 사이</div></div>
+    <div class="lv l3"><div class="lvn">L3</div><div class="lvt">Component Level</div><div class="lvk">spacing/3 = 12px</div><div class="lvk">spacing/4 = 16px</div><div class="lvd">Card padding, Form Field 간격</div></div>
+    <div class="lv l4"><div class="lvn">L4</div><div class="lvt">Inner Level</div><div class="lvk">spacing/1 = 4px</div><div class="lvk">spacing/2 = 8px</div><div class="lvd">Icon-Label 간격, Badge 내부</div></div>
+  </div>
+  <div class="rg">
+    <div class="rb"><div class="rh rh-b">Page &amp; Section 레벨</div><div class="rd">
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">level = page</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">padding ≥ spacing/7 (48px)</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">level = section</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">gap = spacing/5 or spacing/6</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">section = Dashboard grid</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">gap = spacing/5, columns = 12</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">L1 값을 Component 내부에 사용</span></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">레벨 건너뛰기 (L1 → L4 직접)</span></div>
+    </div></div>
+    <div class="rb"><div class="rh rh-g">Component &amp; Inner 레벨</div><div class="rd">
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">level = component (Card, Panel)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">padding = spacing/4, gap = spacing/3</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">level = inner (Icon-Label, Badge)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">gap = spacing/1 or spacing/2</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">button size = MD</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">padding: spacing/2 spacing/4 (8px 16px)</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">임의 숫자 입력 (예: padding 13px)</span></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">4px 배수 아닌 값 사용</span></div>
+    </div></div>
+  </div>
+  <div class="hr"></div>
+  <h3 class="sl sl-a">Auto Layout Preset — 판단 없이 복붙 사용</h3>
+  <div class="g3">
+    <div class="nbox"><div><span class="nc">/* Card */</span></div><div><span class="nk">direction</span>: <span class="nv">vertical</span></div><div><span class="nk">padding</span>: <span class="nv">sp/4 (16px)</span></div><div><span class="nk">gap</span>: <span class="nv">sp/3 (12px)</span></div><div><span class="nk">width</span>: <span class="nv">Fill container</span></div><div><span class="nk">height</span>: <span class="nv">Hug contents</span></div><div><span class="nk">radius</span>: <span class="nv">radius/md (8px)</span></div><div><span class="nk">bg</span>: <span class="np">{{Brand.Surface.Base}}</span></div></div>
+    <div class="nbox"><div><span class="nc">/* Button (MD) */</span></div><div><span class="nk">direction</span>: <span class="nv">horizontal</span></div><div><span class="nk">padding</span>: <span class="nv">sp/2 sp/4 (8 16)</span></div><div><span class="nk">gap</span>: <span class="nv">sp/2 (8px)</span></div><div><span class="nk">width</span>: <span class="nv">Hug contents</span></div><div><span class="nk">height</span>: <span class="nv">Fixed 40px</span></div><div><span class="nk">radius</span>: <span class="nv">radius/sm (4px)</span></div><div><span class="nk">align</span>: <span class="nv">center</span></div></div>
+    <div class="nbox"><div><span class="nc">/* Dashboard Section */</span></div><div><span class="nk">direction</span>: <span class="nv">vertical</span></div><div><span class="nk">padding</span>: <span class="nv">sp/6 (32px)</span></div><div><span class="nk">gap</span>: <span class="nv">sp/5 (24px)</span></div><div><span class="nk">width</span>: <span class="nv">Fill container</span></div><div><span class="nk">bg</span>: <span class="np">{{Brand.Surface.Subtle}}</span></div><div><span class="nk">grid</span>: <span class="nv">12col / 24px gutter</span></div></div>
+    <div class="nbox"><div><span class="nc">/* Form Field */</span></div><div><span class="nk">direction</span>: <span class="nv">vertical</span></div><div><span class="nk">gap</span>: <span class="nv">sp/1 (4px)</span></div><div><span class="nk">width</span>: <span class="nv">Fill container</span></div><div><span class="nk">input h</span>: <span class="nv">Fixed 40px</span></div><div><span class="nc">/* Label+Input+Helper */</span></div></div>
+    <div class="nbox"><div><span class="nc">/* List Item */</span></div><div><span class="nk">direction</span>: <span class="nv">horizontal</span></div><div><span class="nk">padding</span>: <span class="nv">sp/3 sp/4 (12 16)</span></div><div><span class="nk">gap</span>: <span class="nv">sp/3 (12px)</span></div><div><span class="nk">height</span>: <span class="nv">Fixed 56px</span></div><div><span class="nk">align</span>: <span class="nv">center</span></div></div>
+    <div class="nbox"><div><span class="nc">/* AICard */</span></div><div><span class="nk">direction</span>: <span class="nv">vertical</span></div><div><span class="nk">padding</span>: <span class="nv">sp/4 (16px)</span></div><div><span class="nk">gap</span>: <span class="nv">sp/3 (12px)</span></div><div><span class="nk">bg(proc)</span>: <span class="nv">color/ai/state/processing</span></div><div><span class="nk">radius</span>: <span class="nv">radius/lg (12px)</span></div></div>
+  </div>
+  <div class="ctx">
+    <div class="ctxt">Context Block</div>
+    <div class="ctxb">
+      <div><span class="cs">▸ Layout Rules</span></div>
+      <div><span class="cr">IF level=page → padding ≥ 48px</span></div>
+      <div><span class="cr">IF level=section → gap = 24–32px</span></div>
+      <div><span class="cr">IF level=component → padding=16px, gap=12px</span></div>
+      <div><span class="cr">IF level=inner → gap = 4–8px</span></div>
+      <div><span class="cr">DO NOT use arbitrary px — 4px multiples only</span></div>
+      <div><span class="cs">▸ Breakpoint Rules</span></div>
+      <div><span class="cr">IF viewport &lt; lg(1024px) → Sidebar hidden, Cards stack to 1col</span></div>
+      <div><span class="cr">IF viewport = lg(1024px) → Sidebar icon-only collapsed, Cards 2+1col</span></div>
+      <div><span class="cr">IF viewport ≥ xl(1280px) → Sidebar full, Cards 3col (default layout)</span></div>
+      <div><span class="cr">DO NOT support below md(768px) — SaaS is desktop-first</span></div>
+      <div><span class="cn">/* {{Brand.*}} 프로젝트별 교체 */</span></div>
+    </div>
+  </div>
+  <div class="hr"></div>
+  <h3 class="sl">Responsive Breakpoint 가이드 — SaaS Dashboard 기준</h3>
+  <div class="g2">
+    <div>
+      <table class="ptbl" style="margin-bottom:0;">
+  <caption class="sr-only">Responsive Breakpoint 가이드</caption>
+        <thead><tr><th>Breakpoint</th><th>Width</th><th>Tailwind</th><th>Grid</th><th>컨텍스트</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">md</td><td>768px</td><td class="mono">md:</td><td>4col</td><td>태블릿 — 최소 지원 기준</td></tr>
+          <tr><td class="mono">lg</td><td>1024px</td><td class="mono">lg:</td><td>8col</td><td>소형 노트북 — 사이드바 접힘</td></tr>
+          <tr><td class="mono">xl</td><td>1280px</td><td class="mono">xl:</td><td>12col</td><td>일반 노트북 — 기본 레이아웃</td></tr>
+          <tr><td class="mono">2xl</td><td>1536px</td><td class="mono">2xl:</td><td>12col</td><td>데스크탑 — 최적 레이아웃</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nc">/* Dashboard Grid 반응형 규칙 */</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">IF</span> <span class="nv">viewport &lt; lg(1024px)</span></div>
+        <div>&nbsp;&nbsp;<span class="nv">→ Sidebar 숨김 (햄버거 메뉴)</span></div>
+        <div>&nbsp;&nbsp;<span class="nv">→ Metric Card 3col → 1col 스택</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">IF</span> <span class="nv">viewport = lg(1024px)</span></div>
+        <div>&nbsp;&nbsp;<span class="nv">→ Sidebar 아이콘만 표시 (collapsed)</span></div>
+        <div>&nbsp;&nbsp;<span class="nv">→ Metric Card 3col → 2+1col</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">IF</span> <span class="nv">viewport ≥ xl(1280px)</span></div>
+        <div>&nbsp;&nbsp;<span class="nv">→ Sidebar 전체 표시 (full)</span></div>
+        <div>&nbsp;&nbsp;<span class="nv">→ Metric Card 3col 유지</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="no">DO NOT</span> <span class="nv">md 미만 지원 (SaaS는 데스크탑 중심)</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pf"><div class="ft">MediFlow AI SaaS UI Kit · Layout System · Page 06/08</div><div class="fd" style="background:#059669;"></div></div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="pg" id="p7">
+  <div class="pm">
+    <div class="pn">Page 07/08 · Variant Architecture + Component Execution Blocks v2</div>
+    <h2 class="pt pt-r">Variant + Execution v2</h2>
+  </div>
+  <h3 class="sl">Variant / State / Prop / Slot 4줄 판단 기준 <span class="nb-g nb">v2</span></h3>
+  <div class="vd">
+    <div class="vdt">Component Property 분류 기준</div>
+    <div class="vr"><div class="vc">UI 시각 타입 자체가 바뀜 (Primary↔Ghost)</div><div class="va">→</div><div class="vs">Variant 사용</div></div>
+    <div class="vr"><div class="vc">인터랙션 상태 변화 (hover, focus, disabled)</div><div class="va">→</div><div class="vs">State (Variant 축)</div></div>
+    <div class="vr"><div class="vc">켜고 끄는 옵션 (icon 유무, badge 유무)</div><div class="va">→</div><div class="vs">Boolean Property</div></div>
+    <div class="vr"><div class="vc">구조 유지 + 콘텐츠만 교체 (Header, Body)</div><div class="va">→</div><div class="vs">Slot (Instance Swap)</div></div>
+  </div>
+  <div class="rg">
+    <div class="rb"><div class="rh rh-b">Variant IF / THEN / DO NOT</div><div class="rd">
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">시각 타입 변화 (Primary↔Secondary↔Ghost)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">Variant 속성으로 정의</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">인터랙션 상태 (hover / focus / disabled)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">State Variant 축으로 정의</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">content 영역만 교체 (Header, Body, Footer)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">Slot (Instance Swap) 사용</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">Variant 조합 수 &gt; 20개</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">Props 또는 Slot으로 분리 검토</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">데이터 상태(riskLevel)를 Variant로</span></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">Semantic Token으로 충분한 경우 Component Token 생성</span></div>
+    </div></div>
+    <div class="rb"><div class="rh rh-r">AICard — 분리 전/후 비교</div><div class="rd">
+      <div style="font-size:9px;color:#64748B;margin-bottom:3px;">❌ Before — Variant explosion</div>
+      <div class="nbox" style="padding:4px 8px;margin-bottom:6px;font-size:9px;line-height:1.6;">
+        <div><span class="no">AICard/Safe/Default</span></div>
+        <div><span class="no">AICard/Safe/Loading</span></div>
+        <div><span class="no">AICard/Alert/Default ...</span></div>
+        <div><span class="nc">/* 조합 폭발 → 관리 불가 */</span></div>
+      </div>
+      <div style="font-size:9px;color:#64748B;margin-bottom:3px;">✅ After — Variant + State + Props + Slot</div>
+      <div class="nbox" style="padding:4px 8px;font-size:9px;line-height:1.6;">
+        <div><span class="nk">Variant</span>: <span class="nv">Type (card style)</span></div>
+        <div><span class="nk">State</span>: <span class="nv">Default|Loading|Error</span></div>
+        <div><span class="nk">Props</span>: <span class="nv">riskLevel: normal|critical</span></div>
+        <div><span class="ns">Slot</span>: <span class="nc">ResultSection (content swap)</span></div>
+        <div><span class="nv">&lt;AICard state="loading" riskLevel="critical"/&gt;</span></div>
+      </div>
+    </div></div>
+  </div>
+  <div class="hr"></div>
+  <h3 class="sl sl-g">Component Execution Blocks v2 — Slot 명시 포함 <span class="nb nb-g">Slot 추가</span></h3>
+  <div class="eb">
+    <div class="eh eh-b">Button <span class="badge badge-b">Atom</span><span style="font-family:'Courier New',monospace;font-size:9px;margin-left:6px;color:var(--c-primary);">_Button/Base → Button/Type/Size/State</span></div>
+    <div class="ebody">
+      <div class="ec"><div class="ect">Layer Structure + Slot</div><div class="nbox" class="ec-inner"><div><span class="nh">_Button/Base</span> <span class="nc">← private</span></div><div><span class="nk">Button</span> <span class="nc">← public</span></div><div>&nbsp;<span class="nv">└ AutoLayout(H, gap:sp/2)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="nv">├ Icon</span> <span class="nc">(Boolean)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="ns">└ Label</span> <span class="nc">← Slot (text swap)</span></div></div></div>
+      <div class="ec"><div class="ect">Variant / State / Prop</div><div class="nbox" class="ec-inner"><div><span class="np">Variant</span>: <span class="nv">Type=Primary|Secondary|Ghost|Danger</span></div><div><span class="np">Variant</span>: <span class="nv">Size=SM(32)|MD(40)|LG(48)</span></div><div><span class="np">State</span>: <span class="nv">Default|Hover|Active|Disabled|Loading</span></div><div><span class="np">Bool</span>: <span class="nv">Icon=None|Left|Right|Only</span></div></div></div>
+      <div class="ec"><div class="ect">Token Binding</div><div class="nbox" class="ec-inner"><div><span class="nk">bg(default)</span>: <span class="np">{{Brand.Primary}}</span></div><div><span class="nk">bg(hover)</span>: <span class="np">{{Brand.Primary.600}}</span></div><div><span class="nk">text</span>: <span class="nv">color/neutral/0</span></div><div><span class="nk">radius</span>: <span class="nv">radius/sm (4px)</span></div><div><span class="nk">padding(MD)</span>: <span class="nv">sp/2 sp/4</span></div></div></div>
+    </div>
+  </div>
+  <div class="eb">
+    <div class="eh eh-g">Card <span class="badge badge-g">Molecule</span><span style="font-family:'Courier New',monospace;font-size:9px;margin-left:6px;color:#059669;">_Card/Base → Card/Type/State</span></div>
+    <div class="ebody">
+      <div class="ec"><div class="ect">Layer Structure + Slot</div><div class="nbox" class="ec-inner"><div><span class="nh">_Card/Base</span> <span class="nc">← private</span></div><div><span class="nk">Card</span> <span class="nc">← public</span></div><div>&nbsp;<span class="nv">└ AutoLayout(V, gap:sp/3)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="ns">├ Header</span> <span class="nc">← Slot</span></div><div>&nbsp;&nbsp;&nbsp;<span class="ns">├ Body</span> <span class="nc">← Slot (swap per Type)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="ns">└ Footer</span> <span class="nc">← Slot + Boolean</span></div></div></div>
+      <div class="ec"><div class="ect">Variant / State / Prop</div><div class="nbox" class="ec-inner"><div><span class="np">Variant</span>: <span class="np">Type={{Domain.CardType}}</span></div><div><span class="nc">/* patient|appointment|diagnosis|lab|ai */</span></div><div><span class="np">State</span>: <span class="nv">Default|Loading|Empty|Error</span></div><div><span class="np">Variant</span>: <span class="nv">Size=SM|MD|LG|Full</span></div><div><span class="np">Bool</span>: <span class="nv">Footer=show|hide</span></div></div></div>
+      <div class="ec"><div class="ect">Token Binding</div><div class="nbox" class="ec-inner"><div><span class="nk">bg</span>: <span class="np">{{Brand.Surface.Base}}</span></div><div><span class="nk">border</span>: <span class="nv">1px color/neutral/200</span></div><div><span class="nk">radius</span>: <span class="nv">radius/md (8px)</span></div><div><span class="nk">padding</span>: <span class="nv">sp/4 (16px)</span></div><div><span class="nk">gap</span>: <span class="nv">sp/3 (12px)</span></div></div></div>
+    </div>
+  </div>
+  <div class="eb">
+    <div class="eh eh-a">Table <span class="badge badge-a">Organism</span><span style="font-family:'Courier New',monospace;font-size:9px;margin-left:6px;color:#D97706;">Table/State + Row/State + Cell/Type</span></div>
+    <div class="ebody">
+      <div class="ec"><div class="ect">Layer Structure + Slot</div><div class="nbox" class="ec-inner"><div><span class="nk">Table/State=Default</span></div><div>&nbsp;<span class="nv">├ HeaderRow → Cell/Header</span></div><div>&nbsp;<span class="nv">├ Row/State</span> <span class="nc">(repeatable)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="ns">└ Cell</span> <span class="nc">← Slot (Text|Badge|Avatar|Action)</span></div><div>&nbsp;<span class="nv">└ Pagination</span> <span class="nc">(Boolean)</span></div><div><span class="nk">Table/Empty|Loading|Error</span></div></div></div>
+      <div class="ec"><div class="ect">State Rules</div><div class="nbox" class="ec-inner"><div><span class="nk">IF</span> <span class="nv">data=0 →</span> <span class="nok">Table/Empty</span></div><div><span class="nk">IF</span> <span class="nv">fetching →</span> <span class="nok">Row/Loading(Skeleton)</span></div><div><span class="nk">IF</span> <span class="nv">API fail →</span> <span class="nok">Table/Error+Retry</span></div><div><span class="nk">IF</span> <span class="nv">checkbox →</span> <span class="nok">Row/Selected</span></div><div><span class="no">DO NOT</span> <span class="nv">Empty·Error 생략</span></div></div></div>
+      <div class="ec"><div class="ect">Token Binding</div><div class="nbox" class="ec-inner"><div><span class="nk">header bg</span>: <span class="nv">color/neutral/50</span></div><div><span class="nk">row default</span>: <span class="np">{{Brand.Surface.Base}}</span></div><div><span class="nk">row hover</span>: <span class="nv">color/neutral/50</span></div><div><span class="nk">row selected</span>: <span class="np">{{Brand.Primary.100}}</span></div><div><span class="nk">skeleton</span>: <span class="nv">color/neutral/100 pulse</span></div></div></div>
+    </div>
+  </div>
+  <div class="eb">
+    <div class="eh eh-r">AICard <span class="badge badge-r">Organism · AI 전용</span><span style="font-family:'Courier New',monospace;font-size:9px;margin-left:6px;color:#DC2626;">AICard/State + Props(riskLevel)</span></div>
+    <div class="ebody">
+      <div class="ec"><div class="ect">Layer Structure + Slot</div><div class="nbox" class="ec-inner"><div><span class="nk">AICard</span></div><div>&nbsp;<span class="nv">└ AutoLayout(V, gap:sp/3)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="nv">├ ScanFrame</span> <span class="nc">(Idle|Active)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="nv">├ ProcessingIndicator</span> <span class="nc">(Boolean)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="nv">└ ResultSection</span></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ns">├ RiskBadge</span> <span class="nc">← Slot</span></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ns">└ RecommendText</span> <span class="nc">← Slot</span></div></div></div>
+      <div class="ec"><div class="ect">Variant / State / Props</div><div class="nbox" class="ec-inner"><div><span class="nc">/* State: 인터랙션 상태 */</span></div><div><span class="np">State</span>: <span class="nv">Idle|Processing|Result|Error</span></div><div style="height:3px;"></div><div><span class="nc">/* Props: 데이터 상태 */</span></div><div><span class="np">riskLevel</span>: <span class="nv">normal|critical (Boolean)</span></div><div><span class="nv">&lt;AICard state="result" riskLevel="critical"/&gt;</span></div></div></div>
+      <div class="ec"><div class="ect">Token Binding</div><div class="nbox" class="ec-inner"><div><span class="nk">bg(idle)</span>: <span class="np">{{Brand.Surface.Base}}</span></div><div><span class="nk">bg(proc)</span>: <span class="nv">color/ai/state/processing</span></div><div><span class="nk">bg(normal)</span>: <span class="nv">color/ai/state/result</span></div><div><span class="nk">bg(alert)</span>: <span class="nv">color/ai/state/alert</span></div><div><span class="nk">radius</span>: <span class="nv">radius/lg (12px)</span></div></div></div>
+    </div>
+  </div>
+  <div class="eb" style="margin-bottom:0;">
+    <div class="eh eh-t">FormField <span class="badge badge-t">Molecule</span><span style="font-family:'Courier New',monospace;font-size:9px;margin-left:6px;color:#0F766E;">FormField/State → Input/Type/State</span> <span class="nb nb-g">신규</span></div>
+    <div class="ebody">
+      <div class="ec"><div class="ect">Layer Structure + Slot</div><div class="nbox" class="ec-inner"><div><span class="nk">FormField</span></div><div>&nbsp;<span class="nv">└ AutoLayout(V, gap:sp/1)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="ns">├ Label</span> <span class="nc">← Slot (text swap)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="nv">├ InputWrapper</span></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">├ LeadingIcon</span> <span class="nc">(Bool)</span></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ns">├ InputText</span> <span class="nc">← Slot (placeholder)</span></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">└ TrailingIcon</span> <span class="nc">(Bool)</span></div><div>&nbsp;&nbsp;&nbsp;<span class="ns">└ HelperText</span> <span class="nc">← Slot (helper|error)</span></div></div></div>
+      <div class="ec"><div class="ect">Variant / State / Prop</div><div class="nbox" class="ec-inner"><div><span class="np">Variant</span>: <span class="nv">Type=Text|Password|Email|Number|Select</span></div><div><span class="np">State</span>: <span class="nv">Default|Focus|Filled|Error|Disabled</span></div><div><span class="np">Bool</span>: <span class="nv">LeadingIcon, TrailingIcon, HelperText</span></div><div style="height:3px;"></div><div><span class="nc">/* Error State = State Variant */</span></div><div><span class="nc">/* errorMessage = Slot */</span></div></div></div>
+      <div class="ec"><div class="ect">Token Binding</div><div class="nbox" class="ec-inner"><div><span class="nk">bg</span>: <span class="np">{{Brand.Surface.Base}}</span></div><div><span class="nk">border(default)</span>: <span class="nv">1px color/neutral/300</span></div><div><span class="nk">border(focus)</span>: <span class="np">{{Brand.Primary}}</span> <span class="nc">2px</span></div><div><span class="nk">border(error)</span>: <span class="nv">color/error/500 2px</span></div><div><span class="nk">helper(error)</span>: <span class="nv">color/error/500</span></div><div><span class="nk">height</span>: <span class="nv">Fixed 40px</span></div></div></div>
+    </div>
+  </div>
+  <div class="hr"></div>
+  <h3 class="sl sl-r">Empty / Error State 패턴 가이드 — 컴포넌트별 상태 설계 기준</h3>
+  <div class="g2" style="margin-bottom:9px;">
+    <div>
+      <table class="ptbl" style="margin-bottom:0;">
+  <caption class="sr-only">Empty / Error State 패턴</caption>
+        <thead><tr><th>상태</th><th>아이콘</th><th>카피 구조</th><th>CTA</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">Table/Empty</td><td>icon/status/inbox (24px)</td><td>제목 + 부제목</td><td>Primary Button</td></tr>
+          <tr><td class="mono">Table/Error</td><td>icon/status/alert-circle (24px)</td><td>"불러오기 실패" + 안내</td><td>"다시 시도" Ghost Button</td></tr>
+          <tr><td class="mono">Card/Empty</td><td>icon 없음 또는 소형 일러스트</td><td>짧은 안내문 1줄</td><td>선택적</td></tr>
+          <tr><td class="mono">AICard/Idle</td><td>icon/ai/scan (32px)</td><td>"분석을 시작하세요"</td><td>스캔 버튼</td></tr>
+          <tr><td class="mono">AICard/Error</td><td>icon/status/alert-triangle (24px)</td><td>"분석 중 오류 발생"</td><td>"재시도" Ghost Button</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nc">/* Empty / Error State IF/THEN 규칙 */</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">IF</span> <span class="nv">data = [] AND first visit</span></div>
+        <div>&nbsp;&nbsp;<span class="nv">→ Empty State + 온보딩 CTA</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">IF</span> <span class="nv">data = [] AND filtered result</span></div>
+        <div>&nbsp;&nbsp;<span class="nv">→ "검색 결과 없음" + 필터 초기화 CTA</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="nk">IF</span> <span class="nv">API error (network/server)</span></div>
+        <div>&nbsp;&nbsp;<span class="nv">→ Error State + Retry CTA</span></div>
+        <div style="height:4px;"></div>
+        <div><span class="no">DO NOT</span> <span class="nv">Empty와 Error를 동일 State로 처리</span></div>
+        <div><span class="no">DO NOT</span> <span class="nv">빈 화면 노출 (항상 상태 표시)</span></div>
+        <div><span class="no">DO NOT</span> <span class="nv">Error State에서 CTA 생략</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ctx">
+    <div class="ctxt">Context Block v2</div>
+    <div class="ctxb">
+      <div><span class="cs">▸ Variant / State / Prop / Slot Rules</span></div>
+      <div><span class="cr">IF visual type changes → Variant</span></div>
+      <div><span class="cr">IF interaction state (hover/focus/disabled) → State (Variant axis)</span></div>
+      <div><span class="cr">IF toggle (on/off) → Boolean Property</span></div>
+      <div><span class="cr">IF structure stays + content swaps → Slot (Instance Swap)</span></div>
+      <div><span class="cr">DO NOT create Variant for data states (riskLevel, aiResult)</span></div>
+      <div><span class="cr">DO NOT create Component Token if Semantic Token is sufficient</span></div>
+      <div><span class="cs">▸ Specs</span></div>
+      <div><span class="cr">Button: Type=Primary|Secondary|Ghost|Danger, Label=Slot</span></div>
+      <div><span class="cr">Card: Type=<span class="cp">{{Domain.CardType}}</span>, Header+Body+Footer=Slot</span></div>
+      <div><span class="cr">Table: Row=repeatable, Cell=Slot, State=Default|Empty|Loading|Error</span></div>
+      <div><span class="cr">AICard: riskLevel=prop(not variant), ResultSection=Slot</span></div>
+      <div><span class="cr">FormField: State=Default|Focus|Filled|Error|Disabled, Label+Helper=Slot</span></div>
+    </div>
+  </div>
+  <div class="pf"><div class="ft">MediFlow AI SaaS UI Kit · Variant + Execution Blocks v2 · Page 07/08</div><div class="fd" style="background:#DC2626;"></div></div>
+</div>
+
+<!-- PAGE 8 -->
+<div class="pg" id="p8">
+  <div class="pm">
+    <div class="pn">Page 08/08 · Dashboard Blueprint + Master Context Block</div>
+    <h2 class="pt pt-p">Composition Only · Final</h2>
+  </div>
+  <div class="notice notice-p"><strong>⚠ Composition Only</strong> — 이 페이지는 Component를 재정의하지 않습니다. 모든 컴포넌트는 Page 7에서 정의됩니다. 이 페이지는 조합 구조만 다룹니다.</div>
+  <h3 class="sl sl-p">Dashboard Screen Blueprint — Layer Naming + Composition 구조</h3>
+  <div class="db-wrap">
+    <div class="db-label">MediFlow AI Dashboard — 실제 화면 레이어 구조</div>
+    <div class="db-page">
+      <div class="db-nav"><span class="db-nav-t">Frame/Dashboard · bg={{Brand.Surface.Subtle}} · padding=L1(48px)</span><span class="db-nav-t">Page Level</span></div>
+      <div class="db-section">
+        <div class="db-sl">Section/Metrics · gap=L2(24px) · [Card ×3 ref→Page7]</div>
+        <div class="db-g3">
+          <div class="db-card"><div class="db-ct">환자 수</div><div class="db-cv">128</div><div class="db-cs">↑ 12% 이번 달</div></div>
+          <div class="db-card"><div class="db-ct">AI 분석 완료</div><div class="db-cv">847</div><div class="db-cs">오늘 23건</div></div>
+          <div class="db-card"><div class="db-ct">예약 대기</div><div class="db-cv">34</div><div class="db-cs"><span class="db-badge db-by">확인 필요</span></div></div>
+        </div>
+      </div>
+      <div class="db-g2">
+        <div class="db-section">
+          <div class="db-sl">Section/PatientList · [Table ref→Page7] · Row=repeatable</div>
+          <div class="db-table">
+            <div class="db-th"><span>이름</span><span>종류</span><span>상태</span><span>액션</span></div>
+            <div class="db-tr"><span>코코</span><span>말티즈</span><span><span class="db-badge db-bg">정상</span></span><span>보기</span></div>
+            <div class="db-tr"><span>보리</span><span>포메라니안</span><span><span class="db-badge db-br">알림</span></span><span>보기</span></div>
+            <div class="db-tr" style="color:#94A3B8;font-style:italic;font-size:7px;"><span>Loading... (skeleton)</span></div>
+          </div>
+        </div>
+        <div class="db-section">
+          <div class="db-sl">Section/AIResult · [AICard ref→Page7]</div>
+          <div class="db-ai"><div class="db-ait">🤖 AI 영양 분석 결과</div><div class="db-aib">보리 · 위험 성분 감지됨</div><div><span class="db-badge db-br">riskLevel=critical</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="g2">
+    <div>
+      <h3 class="sl sl-a">Dashboard Layer Naming</h3>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="nk">Frame</span>/<span class="nv">Dashboard</span></div>
+        <div>&nbsp;<span class="nh">└ Nav</span>/<span class="nv">Sidebar</span></div>
+        <div>&nbsp;<span class="nh">└ Content</span>/<span class="nv">Main</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nh">└ Section</span>/<span class="nv">Metrics</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ns">└ Card</span> <span class="nc">← ref Page7/Card</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nh">└ Section</span>/<span class="nv">PatientList</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ns">└ Table</span> <span class="nc">← ref Page7/Table</span></div>
+        <div>&nbsp;&nbsp;&nbsp;<span class="nh">└ Section</span>/<span class="nv">AIResult</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ns">└ AICard</span> <span class="nc">← ref Page7/AICard</span></div>
+      </div>
+    </div>
+    <div>
+      <h3 class="sl sl-a">Composition 규칙</h3>
+      <div class="nbox" style="margin-bottom:0;">
+        <div><span class="no">DO NOT</span> <span class="nv">컴포넌트 내부 재정의</span></div>
+        <div><span class="no">DO NOT</span> <span class="nv">임의 Frame 추가 (레벨 무시)</span></div>
+        <div><span class="nok">DO</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">Page7 컴포넌트 Instance 사용</span></div>
+        <div><span class="nok">DO</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nv">L1-L4 Layout 규칙 준수 (Page6)</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="rg">
+    <div class="rb"><div class="rh rh-p">Dark Mode 규칙 — Mode vs State</div><div class="rd">
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">theme 전환 (Light ↔ Dark)</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">Figma Variables Mode 사용</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">component 인터랙션 상태 변화</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">State Variant 사용 (Mode 아님)</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">Dark Mode에서 elevation 표현</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">border + surface/elevated 조합</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">Shadow Token (Figma Variables 미지원)</span></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">Dark Mode를 별도 Variant로 생성</span></div>
+    </div></div>
+    <div class="rb"><div class="rh rh-s">동적 데이터 구조 (Interaction Flow)</div><div class="rd">
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">data = repeatable list</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">Row/State=Default (반복 Instance)</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">cell content = dynamic</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">Cell = Slot (Text|Badge|Avatar|Action)</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">data fetching</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">Row/State=Loading (Skeleton 동일 높이)</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik ki">IF</span><span class="iv">data = empty</span></div>
+      <div class="ir"><span class="ik kt">THEN</span><span class="iv">Table/State=Empty (CTA 포함)</span></div>
+      <div class="sp"></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">실제 데이터로 Figma 파일 오염</span></div>
+      <div class="ir"><span class="ik kd">DO NOT</span><span class="iv">Loading 상태에서 높이 변경</span></div>
+    </div></div>
+  </div>
+  <div class="hr"></div>
+  <div style="background:linear-gradient(135deg,#1E1B4B 0%,#0F172A 100%);border-radius:12px;padding:1.4rem 1.6rem;border:.5px solid #312E81;margin-bottom:0;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;">
+      <div>
+        <div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:#818CF8;margin-bottom:3px;">▸ AI 프롬프트 전용 영역</div>
+        <div style="font-size:9px;color:#94A3B8;">이 아래 내용을 그대로 복사해서 AI 코드 생성 프롬프트 앞에 붙여넣으세요</div>
+      </div>
+      <button id="copy-btn" type="button" aria-label="Master Context Block 전체 복사" onclick="copyMasterCtx()" style="background:var(--c-primary);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:10px;font-weight:500;cursor:pointer;font-family:inherit;white-space:nowrap;">전체 복사</button>
+    </div>
+    <div id="master-ctx-text" style="font-family:'Courier New',monospace;font-size:9.5px;line-height:1.85;color:#C7D2FE;user-select:text;-webkit-user-select:text;">
+      <div><span class="tx-accent-bold">## 1. Token Rules</span></div>
+      <div><span style="color:#34D399;">IF container=page → bg={{Brand.Surface.Subtle}}</span></div>
+      <div><span style="color:#34D399;">IF container=card|modal → bg={{Brand.Surface.Base}}</span></div>
+      <div><span style="color:#34D399;">IF ai_state=processing → color=color/ai/state/processing</span></div>
+      <div><span style="color:#34D399;">IF ai_state=result(normal) → color=color/ai/state/result</span></div>
+      <div><span style="color:#34D399;">IF ai_state=alert → color=color/ai/state/alert</span></div>
+      <div><span style="color:#34D399;">DO NOT bind Primitive tokens directly to components</span></div>
+      <div><span style="color:#34D399;">DO NOT create Component Token if Semantic Token is sufficient</span></div>
+      <div style="height:6px;"></div>
+      <div><span class="tx-accent-bold">## 2. Layout Rules</span></div>
+      <div><span style="color:#34D399;">IF level=page → padding ≥ 48px (spacing/7)</span></div>
+      <div><span style="color:#34D399;">IF level=section → gap = 24–32px (spacing/5–6)</span></div>
+      <div><span style="color:#34D399;">IF level=component → padding=16px, gap=12px</span></div>
+      <div><span style="color:#34D399;">IF level=inner → gap = 4–8px (spacing/1–2)</span></div>
+      <div><span style="color:#34D399;">DO NOT use arbitrary px — 4px multiples only</span></div>
+      <div style="height:6px;"></div>
+      <div><span class="tx-accent-bold">## 3. Component Rules</span></div>
+      <div><span style="color:#34D399;">IF visual type changes → Variant</span></div>
+      <div><span style="color:#34D399;">IF interaction state (hover/focus/disabled) → State (Variant axis)</span></div>
+      <div><span style="color:#34D399;">IF toggle (on/off) → Boolean Property</span></div>
+      <div><span style="color:#34D399;">IF structure stays + content swaps → Slot (Instance Swap)</span></div>
+      <div><span style="color:#34D399;">Button: Type=Primary|Secondary|Ghost|Danger, Label=Slot</span></div>
+      <div><span style="color:#34D399;">Card: Type={{Domain.CardType}}, Header+Body+Footer=Slot</span></div>
+      <div><span style="color:#34D399;">Table: Row=repeatable, Cell=Slot, State=Default|Empty|Loading|Error</span></div>
+      <div><span style="color:#34D399;">AICard: riskLevel=prop(not variant), ResultSection=Slot</span></div>
+      <div><span style="color:#34D399;">FormField: State=Default|Focus|Filled|Error|Disabled, Label+Helper=Slot</span></div>
+      <div style="height:6px;"></div>
+      <div><span class="tx-accent-bold">## 4. Composition Rules</span></div>
+      <div><span style="color:#34D399;">IF theme change → Figma Variables Mode (not Variant)</span></div>
+      <div><span style="color:#34D399;">IF Dark Mode elevation → border + surface/elevated (no Shadow Token)</span></div>
+      <div><span style="color:#34D399;">DO NOT redefine components inside screen frames</span></div>
+      <div><span style="color:#34D399;">DO NOT skip layout levels (L1→L4 jump)</span></div>
+      <div><span style="color:#34D399;">Layer naming: Frame/ScreenName → Section/Name → Component/Name</span></div>
+      <div><span style="color:#34D399;">IF viewport &lt; lg(1024px) → Sidebar hidden, Cards 1col stack</span></div>
+      <div><span style="color:#34D399;">IF viewport ≥ xl(1280px) → Sidebar full, Cards 3col (default)</span></div>
+      <div style="height:6px;"></div>
+      <div><span class="tx-accent-bold">## 5. Motion Rules</span></div>
+      <div><span style="color:#34D399;">IF interaction = instant feedback (hover, focus) → motion/fast (100ms ease-out)</span></div>
+      <div><span style="color:#34D399;">IF interaction = state change (open, close, toggle) → motion/base (200ms ease-in-out)</span></div>
+      <div><span style="color:#34D399;">IF interaction = large transition (modal, drawer, page) → motion/slow (300ms ease-in-out)</span></div>
+      <div><span style="color:#34D399;">DO NOT exceed 300ms for any UI component transition</span></div>
+      <div style="height:6px;"></div>
+      <div><span class="tx-accent-bold">## 6. Accessibility Rules</span></div>
+      <div><span style="color:#34D399;">DO NOT use AI State Tokens (alert/processing/result) as text color — backgrounds only</span></div>
+      <div><span style="color:#34D399;">DO NOT use white text on error/500 — contrast 3.76:1 fails AA</span></div>
+      <div><span style="color:#34D399;">Text on AI State backgrounds → use neutral/900 (contrast ≥ 5.5:1)</span></div>
+      <div><span style="color:#34D399;">Minimum contrast: body text 4.5:1 | Large text (18px+) 3:1</span></div>
+      <div style="height:6px;"></div>
+      <div><span class="tx-accent-bold">## 7. Reusable Parameters</span></div>
+      <div><span style="color:#FCD34D;">{{Brand.Primary}}</span> <span class="tx-muted-sm">← #0F766E → 브랜드 Primary 색상</span></div>
+      <div><span style="color:#FCD34D;">{{Brand.Primary.600}}</span> <span class="tx-muted-sm">← #4338CA → hover 상태</span></div>
+      <div><span style="color:#FCD34D;">{{Brand.Primary.100}}</span> <span class="tx-muted-sm">← #E0E7FF → 선택 배경</span></div>
+      <div><span style="color:#FCD34D;">{{Brand.Surface.Base}}</span> <span class="tx-muted-sm">← #FFFFFF → 카드 배경</span></div>
+      <div><span style="color:#FCD34D;">{{Brand.Surface.Subtle}}</span> <span class="tx-muted-sm">← #F8FAFC → 페이지 배경</span></div>
+      <div><span style="color:#FCD34D;">{{Brand.AI.Base}}</span> <span class="tx-muted-sm">← #7C3AED → AI 전용 (없으면 제거)</span></div>
+      <div><span style="color:#FCD34D;">{{Domain.CardType}}</span> <span class="tx-muted-sm">← patient|appointment|diagnosis|lab|ai</span></div>
+      <div><span style="color:#FCD34D;">{{Brand.Motion.Fast}}</span> <span class="tx-muted-sm">← 100ms ease-out → hover/focus transition</span></div>
+      <div><span style="color:#FCD34D;">{{Brand.Motion.Base}}</span> <span class="tx-muted-sm">← 200ms ease-in-out → open/close transition</span></div>
+      <div><span style="color:#FCD34D;">{{Brand.Motion.Base}}</span> <span class="tx-muted-sm">← 200ms ease-in-out → open/close transition</span></div>
+    </div>
+    <div style="height:6px;"></div>
+    <div><span class="tx-accent-bold">## 8. Output Instructions</span></div>
+    <div><span style="color:#34D399;">When generating output from this context, choose one of the following modes:</span></div>
+    <div style="height:4px;"></div>
+    <div><span style="color:#FCD34D;">MODE A — Figma Make</span></div>
+    <div><span style="color:#34D399;">Generate: Figma Variables Collection + Component Set + Screen Templates</span></div>
+    <div><span style="color:#34D399;">Format: Step-by-step Figma Make instructions referencing token names above</span></div>
+    <div><span style="color:#34D399;">Constraint: All fills/strokes → Variable reference. No raw hex values.</span></div>
+    <div style="height:4px;"></div>
+    <div><span style="color:#FCD34D;">MODE B — React / Tailwind Code</span></div>
+    <div><span style="color:#34D399;">Generate: TypeScript React components with Tailwind utility classes</span></div>
+    <div><span style="color:#34D399;">Format: One component per file, props matching Figma Variant axes exactly</span></div>
+    <div><span style="color:#34D399;">Constraint: Use CSS variables (--c-primary etc.) for brand colors, not hardcoded hex</span></div>
+    <div style="height:4px;"></div>
+    <div><span style="color:#FCD34D;">MODE C — Design Token JSON</span></div>
+    <div><span style="color:#34D399;">Generate: W3C Design Token Community Group format JSON</span></div>
+    <div><span style="color:#34D399;">Format: { "color": { "primary": { "500": { "$value": "{{Brand.Primary}}", "$type": "color" } } } }</span></div>
+    <div><span style="color:#34D399;">Constraint: Replace {{Brand.*}} with actual values before outputting</span></div>
+    <div style="height:4px;"></div>
+    <div><span class="tx-muted-sm">/* Default mode if unspecified: MODE B (React/Tailwind) */</span></div>
+  </div>
+
+  <div class="pf"><div class="ft">MediFlow AI SaaS UI Kit · Dashboard Blueprint + Master Context Block · Page 08/08</div><div class="fd" style="background:#7C3AED;"></div></div>
+</div>
+
+</div>
+</main>
+<!-- 상단이동 버튼 -->
+<button id="back-to-top" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="맨 위로">↑</button>
+
+<script>
+/* copy MCB content */
+function copyMasterCtx(){
+  var el=document.getElementById('master-ctx-text');
+  var btn=document.getElementById('copy-btn');
+  /* collect leaf text nodes only - strip attribute noise */
+  var lines=Array.from(el.querySelectorAll('div,span')).filter(function(n){return n.children.length===0&&n.textContent.trim();}).map(function(n){return n.textContent.trim();});
+  var text=lines.length>0?lines.join('\n'):(el.innerText||el.textContent);
+  function fallbackCopy(t,b){
+    var ta=document.createElement('textarea');
+    ta.value=t;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.focus();ta.select();
+    try{document.execCommand('copy');b.textContent='\u2713 \uBCF5\uC0AC\uB428';
+    setTimeout(function(){b.textContent='\uC804\uCCB4 \uBCF5\uC0AC';},2000);}
+    catch(e){}document.body.removeChild(ta);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text)
+      .then(function(){btn.textContent='\u2713 \uBCF5\uC0AC\uB428';setTimeout(function(){btn.textContent='\uC804\uCCB4 \uBCF5\uC0AC';},2000);})
+      .catch(function(){fallbackCopy(text,btn);});
+  }else{fallbackCopy(text,btn);}
+}
+
+/* back-to-top button visibility */
+(function(){
+  var btn=document.getElementById('back-to-top');
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>400){btn.classList.add('visible');}
+    else{btn.classList.remove('visible');}
+  },{passive:true});
+})();
+
+/* TOC active page highlight via IntersectionObserver */
+(function(){
+  var pages=document.querySelectorAll('.pg[id]');
+  var tocLinks={};
+  document.querySelectorAll('.toc-item[href]').forEach(function(a){
+    tocLinks[a.getAttribute('href').replace('#','')]=a;
+  });
+  if(!('IntersectionObserver' in window))return;
+  var current='';
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){current=entry.target.id;}
+    });
+    Object.values(tocLinks).forEach(function(a){a.classList.remove('active');});
+    if(tocLinks[current]){tocLinks[current].classList.add('active');}
+  },{threshold:0.15});
+  pages.forEach(function(p){observer.observe(p);});
+})();
+</script>
+</body>
+</html>
